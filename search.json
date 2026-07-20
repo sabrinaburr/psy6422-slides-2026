@@ -3649,476 +3649,476 @@
   {
     "objectID": "PSY6422_Models_BonusLecture.html#material-for-these-slides",
     "href": "PSY6422_Models_BonusLecture.html#material-for-these-slides",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Material for These Slides",
     "text": "Material for These Slides\n\nThe material we covered in these slides is from Kieran Healy’s freely available textbook Data Visualization: A Practical Introduction. The link to this book can be found on our Blackboard page."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#work-with-models",
     "href": "PSY6422_Models_BonusLecture.html#work-with-models",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Work with Models",
     "text": "Work with Models\n\nRarely can we jump from raw numbers in a data table to a proper visualisation. Data needs to be summarised and/or transformed before it can be plotted. To help us with this, we create statistical models.\n\nWe can use various modelling techniques directly within geoms in ggplot2."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#why-visualise-models",
     "href": "PSY6422_Models_BonusLecture.html#why-visualise-models",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Why Visualise Models?",
     "text": "Why Visualise Models?\n\n\nModels are simplified summaries of data relationships (y ~ x)\nVisualisations can help:\n\nCheck whether model assumptions are reasonable\nSee where a model performs well or poorly (via residuals or prediction errors)\nCommunicate the model and its uncertainty to others"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#dataset-for-examples",
     "href": "PSY6422_Models_BonusLecture.html#dataset-for-examples",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Dataset for Examples",
     "text": "Dataset for Examples\n\nExamples in these slides use the gapminder dataset. This dataset tracks economic and social indicators (e.g., life expectancy, GDP per capita) over time. You will need to install the package before loading the library.\n\n\n\nlibrary(gapminder)\ngapminder %&gt;% as_tibble() %&gt;% slice_head(n = 8)\n\n# A tibble: 8 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.\n7 Afghanistan Asia       1982    39.9 12881816      978.\n8 Afghanistan Asia       1987    40.8 13867957      852."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#packages-needed",
     "href": "PSY6422_Models_BonusLecture.html#packages-needed",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Packages Needed",
     "text": "Packages Needed\n\nFor these slides, be sure to install and load these packages: tidyverse, gapminder, socviz, broom, modelr, scales, survey, and srvyr.\n\n\nlibrary(tidyverse)\nlibrary(gapminder)\nlibrary(socviz)\nlibrary(broom)\nlibrary(modelr)\nlibrary(scales)\nlibrary(survey)\nlibrary(srvyr)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#revisiting-the-basics",
     "href": "PSY6422_Models_BonusLecture.html#revisiting-the-basics",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Revisiting the Basics",
     "text": "Revisiting the Basics\n\nRecall that histograms, density plots, and boxplots compute either single numbers or new variables before plotting them."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#revisiting-the-basics-1",
     "href": "PSY6422_Models_BonusLecture.html#revisiting-the-basics-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Revisiting the Basics",
     "text": "Revisiting the Basics\n\nHistogram for life expectancy (lifeExp)\n\np &lt;- ggplot(data = gapminder, aes(x = lifeExp)) +\n  geom_histogram(binwidth = 3, fill = \"tomato\", color = \"white\") +\n  labs(title = \"Distribution of Life Expectancy\", \n       x = \"Life Expectancy\", y = \"Count\") + \n  theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#revisiting-the-basics-2",
     "href": "PSY6422_Models_BonusLecture.html#revisiting-the-basics-2",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Revisiting the Basics",
     "text": "Revisiting the Basics\n\nDensity plot for life expectancy (lifeExp) by continent (continent)\n\np &lt;- ggplot(data = gapminder, aes(x = lifeExp)) +\n    geom_density(aes(colour = continent, fill = continent), alpha = 0.1) +\n    labs(title = \"Density Plot for Life Expectancy by Continent\", x = \"Life Expectancy\", y = \"Density\") +\n    theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#revisiting-the-basics-3",
     "href": "PSY6422_Models_BonusLecture.html#revisiting-the-basics-3",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Revisiting the Basics",
     "text": "Revisiting the Basics\n\nBoxplot for life expectancy (lifeExp) by continent (continent)\n\np &lt;- ggplot(gapminder, aes(x = continent, y = lifeExp)) +\n  geom_boxplot(outlier.colour = \"tomato\") +\n  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1 / 4) + \n  labs(title = \"Life Expectancy by Continent\", \n       x = \"Continent\", y = \"Life Expectancy\") + \n  theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#a-simple-model",
     "href": "PSY6422_Models_BonusLecture.html#a-simple-model",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "A Simple Model",
     "text": "A Simple Model\n\nWe also learned how to add a regression line using geom_smooth() function. Here we add a regression line for the scatterplot looking at GDP per capita (gpdPercap) by life expectancy (lifeExp)\n\n\np &lt;- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"tomato\", linetype = \"dashed\") +\n  labs(title = \"GDP vs. Life Expectancy\", x = \"GDP Per Capita\", y = \"Life Expectancy\") + \n  theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#log-transformation",
     "href": "PSY6422_Models_BonusLecture.html#log-transformation",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Log Transformation",
     "text": "Log Transformation\n\nNotice the data didn’t look normally distributed. One option is to log transform GDP per capita (gdpPercap)\n\np &lt;- ggplot(data = gapminder, aes(x = log(gdpPercap), y = lifeExp)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"tomato\", linetype = \"dashed\") +\n  labs(title = \"GDP vs. Life Expectancy\", x = \"GDP Per Capita (log)\", y = \"Life Expectancy\") + \n  theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-with-geom_smooth",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-with-geom_smooth",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models with geom_smooth()",
     "text": "Testing Other Models with geom_smooth()\n\nThe geom_smooth fuction can take a range of method arguments to fit LOESS, OLS, robust regression lines, and others."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-rlm",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-rlm",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: rlm",
     "text": "Testing Other Models: rlm\n\nThe lm() function provides a standard linear regression model. It assumes that the data follow a normal distribution and it is sensitive to outliers, which can lead to biased coefficient estimates.\n\nA robust linear regression may be better. We can use the rlm() function. This function uses a robust M-estimation approach and downplays the impact of outliers. It’s more suitable for datasets with influential observations."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-rlm-1",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-rlm-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: rlm",
     "text": "Testing Other Models: rlm\n\n\np &lt;- ggplot(data = gapminder, aes(x = log(gdpPercap), y = lifeExp)) +\n  geom_point(alpha = 0.1) +\n  geom_smooth(method = MASS::rlm, se = FALSE, color = \"tomato\", linetype = \"solid\") +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"steelblue\", linetype = \"solid\") +\n  labs(title = \"GDP vs. Life Expectancy\", x = \"GDP Per Capita (log)\", y = \"Life Expectancy\") +\n  theme_bw()\n\nprint(p)\n\n\nNote: calling MASS:: rlm allows us to directly access the rlm function without loading the whole library."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-spline",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-spline",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: Spline",
     "text": "Testing Other Models: Spline\n\nA spline is a special function defined by polynomial pieces. The term ‘spline’ refers to a broad family of functions used to fit curves to data points. These functions are valuable in applications where you need to both interpolate (find new data points within a range of known data points) and smooth out data, whether it’s one-dimensional or multi-dimensional."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-spline-regression",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-spline-regression",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: Spline Regression",
     "text": "Testing Other Models: Spline Regression\n\nSpline regression is a powerful non-parametric regression method. Instead of fitting a single model to the entire dataset, this technique divides the data into smaller segments at specific points called knots. Each segment, or “bin,” is then fitted with its own separate model. This allows for more flexible and accurate modeling of complex relationships in the data."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-bs",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-bs",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: bs",
     "text": "Testing Other Models: bs\n\n\np &lt;- ggplot(data = gapminder, aes(x = log(gdpPercap), y = lifeExp)) +\n  geom_point(alpha = 0.1) +\n    geom_smooth(color = \"tomato\", method = \"lm\", size = 1.2, \n                formula = y ~ splines::bs(x, 3), se = FALSE) + \n  labs(title = \"GDP vs. Life Expectancy\", x = \"GDP Per Capita (log)\", y = \"Life Expectancy\") + \n  theme_bw()\n\nprint(p)\n\n\nNote: We are using splines::bs to call the bs (b-spline) function from the splines package. The default spline model in R is a third-degree polynomial."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#geom_quantile",
     "href": "PSY6422_Models_BonusLecture.html#geom_quantile",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "geom_quantile",
     "text": "geom_quantile\n\nThe geom_quantile function is like a specialised version of geom_smooth. It can fit quantile regression lines using a variety of methods. The quantiles argument takes a vector specifying the quantiles at which to fit the lines."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-quantile-regression",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-quantile-regression",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: Quantile Regression",
     "text": "Testing Other Models: Quantile Regression\n\nQuantile regression models the relationship between a set of predictor variables and specific quantiles (or percentiles) of a target variable, rather than just the conditional mean. It’s more robust to outliers and doesn’t assume a particular distribution for the data, making it useful for understanding how relationships change across different parts of a dataset."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-rq-in-geom_quantile",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-rq-in-geom_quantile",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: rq in geom_quantile",
     "text": "Testing Other Models: rq in geom_quantile\n\nThe geom_quantile() function is used to visualise quantile regression models. By default, it uses the rq() method from the quantreg package to fit a linear quantile regression.\n\nThe core usage of the rq() function is similar to lm(), but it includes a crucial additional parameter, tau. Tau is a numerical value between 0 and 1 that represents the quantile you want to model. For example, tau = 0.5 fits the median while tau = 0.25 and tau = 0.75 fit the first and third quantiles, respectively."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-rq-in-geom_quantile-1",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-rq-in-geom_quantile-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: rq in geom_quantile",
     "text": "Testing Other Models: rq in geom_quantile\n\nLet’s use quantile regression to look at GDP per capita (gpdPercap) and life expectancy (lifeExp), with the three lines representing the 50th, 25th, and 75th quantiles.\nThe middle line (50th quantile) will model the relationship for a “typical” country.\nThe lower line (25th quantile) and upper line (75th quantile) will model the relationship for countries at the 25th and 75th percentile of life expectancy, respectively. These will show the expected life expectancy for the “bottom quarter” and “top quarter” of countries at a given GDP per capita."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-rq-in-geom_quantile-2",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-rq-in-geom_quantile-2",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: rq in geom_quantile",
     "text": "Testing Other Models: rq in geom_quantile\n\n\np &lt;- ggplot(gapminder, aes(x = log(gdpPercap), y = lifeExp)) +\n  geom_point(alpha = 0.3) +\n  geom_quantile(method = \"rq\", quantiles = c(0.25, 0.5, 0.75), size = 1, se = FALSE) +\n  labs(\n    title = \"Quantile Regression of Life Expectancy vs. GDP per Capita\", \n    x = \"GDP per Capita (log)\", y = \"Life Expectancy\"\n  ) +\n  theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-rqss-in-geom_quantile",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-rqss-in-geom_quantile",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: rqss in geom_quantile",
     "text": "Testing Other Models: rqss in geom_quantile\n\nUsing rqss with a lambda value of 1 introduces non-linearity and smoothing to the quantile regression lines. Unlike the linear rq method, the rqss method fits a spline, allowing the lines to curve and follow the shape of the data more closely.\nA lambda of 1 is a relatively small value, allowing for a good amount of flexibility, but not so much that the lines become overly “wiggly” and overfit the data. Larger lambda values would result in straighter, more constrained lines, while smaller values would produce more flexible, curvier lines."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#testing-other-models-rqss-in-geom_quantile-1",
     "href": "PSY6422_Models_BonusLecture.html#testing-other-models-rqss-in-geom_quantile-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Testing Other Models: rqss in geom_quantile",
     "text": "Testing Other Models: rqss in geom_quantile\n\n\np &lt;- ggplot(gapminder, aes(x = log(gdpPercap), y = lifeExp)) +\n  geom_point(alpha = 0.1) +\n  geom_quantile(color = \"tomato\", size = 1.2, method = \"rqss\", \n                lambda = 1, quantiles = c(0.25, 0.5, 0.75)) +\n  labs(\n    title = \"Quantile Regression of Life Expectancy vs. GDP per Capita\", \n    x = \"GDP per Capita (log)\", y = \"Life Expectancy\"\n  ) +\n  theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#plot-several-fits-legend",
     "href": "PSY6422_Models_BonusLecture.html#plot-several-fits-legend",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Plot Several Fits + Legend",
     "text": "Plot Several Fits + Legend\n\nWe can look at several fits on the sample plot by layering on new smoothers with geom_smmoth().\nBy setting the color and fill aesthetics to different values for each fit, we can easily distinguish them visually.\nHowever, ggplot will not draw a legend to tell us which fit is which because the smoothers are not logically connected to one another. Instead, they exist as separate layers.\n\nWith geom_smooth we can map the color and fill aesthetics to a string describing the model we are fitting. We can then use scale_color_manual() and scale_fill_manual() to create the legend."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#plot-several-fits-legend-1",
     "href": "PSY6422_Models_BonusLecture.html#plot-several-fits-legend-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Plot Several Fits + Legend",
     "text": "Plot Several Fits + Legend\n\nLet’s create a plot with three different smoothers (lm, cubic spline, and loess).\nWe will start by selecting three qualtitatively different colours from a larger palette using the RColorBrewer package and the function brewer.pal\n\n\nour_model_colours &lt;- RColorBrewer::brewer.pal(3, \"Set1\")\nour_model_colours\n\n[1] \"#E41A1C\" \"#377EB8\" \"#4DAF4A\""
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#plot-several-fits-legend-2",
     "href": "PSY6422_Models_BonusLecture.html#plot-several-fits-legend-2",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Plot Several Fits + Legend",
     "text": "Plot Several Fits + Legend\n\nNow we can create a plot with our three smoothers, mapping the colour and fill within the aes() function as the name of the smoother.\n\nUsually we have mapped aesthetics to names of variables, not strings. Now, we can create a new single-value variable for the name of each of our models and ggplot will properly construct the relevant guide if we call scale_color_manual() and scale_fill_manual(), resulting in a sinple plot with legend."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#plot-fits-slide",
     "href": "PSY6422_Models_BonusLecture.html#plot-fits-slide",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Plot Several Fits + Legend",
     "text": "Plot Several Fits + Legend\n\n\n\np0 &lt;- ggplot(data = gapminder,\n             mapping = aes(x = log(gdpPercap), y = lifeExp))\n\np1 &lt;- p0 + geom_point(alpha = 0.2) +\n    geom_smooth(method = \"lm\", aes(color = \"OLS\", fill = \"OLS\")) +\n    geom_smooth(method = \"lm\", formula = y ~ splines::bs(x, df = 3),\n                aes(color = \"Cubic Spline\", fill = \"Cubic Spline\")) +\n    geom_smooth(method = \"loess\",\n                aes(color = \"LOESS\", fill = \"LOESS\"))\n\np1 + scale_color_manual(name = \"Models\", values = our_model_colours) +\n    scale_fill_manual(name = \"Models\", values = our_model_colours) +\n    theme(legend.position = \"top\")"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#plot-several-fits-legend-3",
     "href": "PSY6422_Models_BonusLecture.html#plot-several-fits-legend-3",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Plot Several Fits + Legend",
     "text": "Plot Several Fits + Legend"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#looking-inside-model-objects",
     "href": "PSY6422_Models_BonusLecture.html#looking-inside-model-objects",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Looking Inside Model Objects",
     "text": "Looking Inside Model Objects\n\n\nIn R, everything is an object: vectors, data frames, and also models.\n\nModel objects (like those from lm()) are more complex than data frames.\n\nThey are lists that contain:\n\ncoefficients\n\nfitted values\n\nresiduals\n\nmetadata (formula, data, degrees of freedom, etc.)\n\n\nGoal: Learn how to explore model objects and extract useful pieces for plotting."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#inspecting-object-structure-with-str",
     "href": "PSY6422_Models_BonusLecture.html#inspecting-object-structure-with-str",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Inspecting Object Structure with str()",
     "text": "Inspecting Object Structure with str()\n\nJust like with data frames, we can use str() to peek inside any object.\n\n\nstr(gapminder)\n\ntibble [1,704 × 6] (S3: tbl_df/tbl/data.frame)\n $ country  : Factor w/ 142 levels \"Afghanistan\",..: 1 1 1 1 1 1 1 1 1 1 ...\n $ continent: Factor w/ 5 levels \"Africa\",\"Americas\",..: 3 3 3 3 3 3 3 3 3 3 ...\n $ year     : int [1:1704] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...\n $ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...\n $ pop      : int [1:1704] 8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...\n $ gdpPercap: num [1:1704] 779 821 853 836 740 ..."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#strgapminder",
     "href": "PSY6422_Models_BonusLecture.html#strgapminder",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "str(gapminder)",
     "text": "str(gapminder)\n\nThe output from str(gapminder) is quite dense. It contains information about the object as a whole as well as each variable in it."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#inspecting-object-structure-with-str-1",
     "href": "PSY6422_Models_BonusLecture.html#inspecting-object-structure-with-str-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Inspecting Object Structure with str()",
     "text": "Inspecting Object Structure with str()\n\nThe same idea applies to models. But models are more complex, so their structure is more complicated. Any information we might want about a model is stored in or is computable from parts of a model object."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#inspecting-object-structure-with-str-2",
     "href": "PSY6422_Models_BonusLecture.html#inspecting-object-structure-with-str-2",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Inspecting Object Structure with str()",
     "text": "Inspecting Object Structure with str()\n\nTo demonstrate, let’s look at a model of life expectancy.\n\nlm() creates an object called out. That object is a list with named components.\n\n\nout &lt;- lm(lifeExp ~ gdpPercap + pop + continent,\n          data = gapminder)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#summarising-the-model",
     "href": "PSY6422_Models_BonusLecture.html#summarising-the-model",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Summarising the Model",
     "text": "Summarising the Model\n\nWe can use summary(), a generic function. summary() checks the class of its input and then dispatches a class-specific method. For an lm() object, it calls summary.lm(), which calcualtes and formats the model output. This is why summary() looks different for a data frame vs. model.\n\nsummary(out)\n\n\nCall:\nlm(formula = lifeExp ~ gdpPercap + pop + continent, data = gapminder)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-49.161  -4.486   0.297   5.110  25.175 \n\nCoefficients:\n                   Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       4.781e+01  3.395e-01 140.819  &lt; 2e-16 ***\ngdpPercap         4.495e-04  2.346e-05  19.158  &lt; 2e-16 ***\npop               6.570e-09  1.975e-09   3.326 0.000901 ***\ncontinentAmericas 1.348e+01  6.000e-01  22.458  &lt; 2e-16 ***\ncontinentAsia     8.193e+00  5.712e-01  14.342  &lt; 2e-16 ***\ncontinentEurope   1.747e+01  6.246e-01  27.973  &lt; 2e-16 ***\ncontinentOceania  1.808e+01  1.782e+00  10.146  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.365 on 1697 degrees of freedom\nMultiple R-squared:  0.5821,    Adjusted R-squared:  0.5806 \nF-statistic: 393.9 on 6 and 1697 DF,  p-value: &lt; 2.2e-16"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#inspecting-object-structure-with-str-3",
     "href": "PSY6422_Models_BonusLecture.html#inspecting-object-structure-with-str-3",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Inspecting Object Structure with str()",
     "text": "Inspecting Object Structure with str()\n\nIf we want to know what’s inside the model, we need to use str(). If we request max.level = 1 we will get the teop-level list elements (e.g., coefficients, residuals, fitted.values, qr, etc.). Some elements will be single numbers, some will be vectors, and some will be nested lists.\n\n\nstr(out, max.level = 1)\n\nList of 13\n $ coefficients : Named num [1:7] 4.78e+01 4.50e-04 6.57e-09 1.35e+01 8.19 ...\n  ..- attr(*, \"names\")= chr [1:7] \"(Intercept)\" \"gdpPercap\" \"pop\" \"continentAmericas\" ...\n $ residuals    : Named num [1:1704] -27.6 -26.1 -24.5 -22.4 -20.3 ...\n  ..- attr(*, \"names\")= chr [1:1704] \"1\" \"2\" \"3\" \"4\" ...\n $ effects      : Named num [1:1704] -2455.1 311.1 42.6 101.1 -17.2 ...\n  ..- attr(*, \"names\")= chr [1:1704] \"(Intercept)\" \"gdpPercap\" \"pop\" \"continentAmericas\" ...\n $ rank         : int 7\n $ fitted.values: Named num [1:1704] 56.4 56.4 56.5 56.5 56.4 ...\n  ..- attr(*, \"names\")= chr [1:1704] \"1\" \"2\" \"3\" \"4\" ...\n $ assign       : int [1:7] 0 1 2 3 3 3 3\n $ qr           :List of 5\n  ..- attr(*, \"class\")= chr \"qr\"\n $ df.residual  : int 1697\n $ contrasts    :List of 1\n $ xlevels      :List of 1\n $ call         : language lm(formula = lifeExp ~ gdpPercap + pop + continent, data = gapminder)\n $ terms        :Classes 'terms', 'formula'  language lifeExp ~ gdpPercap + pop + continent\n  .. ..- attr(*, \"variables\")= language list(lifeExp, gdpPercap, pop, continent)\n  .. ..- attr(*, \"factors\")= int [1:4, 1:3] 0 1 0 0 0 0 1 0 0 0 ...\n  .. .. ..- attr(*, \"dimnames\")=List of 2\n  .. ..- attr(*, \"term.labels\")= chr [1:3] \"gdpPercap\" \"pop\" \"continent\"\n  .. ..- attr(*, \"order\")= int [1:3] 1 1 1\n  .. ..- attr(*, \"intercept\")= int 1\n  .. ..- attr(*, \"response\")= int 1\n  .. ..- attr(*, \".Environment\")=&lt;environment: R_GlobalEnv&gt; \n  .. ..- attr(*, \"predvars\")= language list(lifeExp, gdpPercap, pop, continent)\n  .. ..- attr(*, \"dataClasses\")= Named chr [1:4] \"numeric\" \"numeric\" \"numeric\" \"factor\"\n  .. .. ..- attr(*, \"names\")= chr [1:4] \"lifeExp\" \"gdpPercap\" \"pop\" \"continent\"\n $ model        :'data.frame':  1704 obs. of  4 variables:\n  ..- attr(*, \"terms\")=Classes 'terms', 'formula'  language lifeExp ~ gdpPercap + pop + continent\n  .. .. ..- attr(*, \"variables\")= language list(lifeExp, gdpPercap, pop, continent)\n  .. .. ..- attr(*, \"factors\")= int [1:4, 1:3] 0 1 0 0 0 0 1 0 0 0 ...\n  .. .. .. ..- attr(*, \"dimnames\")=List of 2\n  .. .. ..- attr(*, \"term.labels\")= chr [1:3] \"gdpPercap\" \"pop\" \"continent\"\n  .. .. ..- attr(*, \"order\")= int [1:3] 1 1 1\n  .. .. ..- attr(*, \"intercept\")= int 1\n  .. .. ..- attr(*, \"response\")= int 1\n  .. .. ..- attr(*, \".Environment\")=&lt;environment: R_GlobalEnv&gt; \n  .. .. ..- attr(*, \"predvars\")= language list(lifeExp, gdpPercap, pop, continent)\n  .. .. ..- attr(*, \"dataClasses\")= Named chr [1:4] \"numeric\" \"numeric\" \"numeric\" \"factor\"\n  .. .. .. ..- attr(*, \"names\")= chr [1:4] \"lifeExp\" \"gdpPercap\" \"pop\" \"continent\"\n - attr(*, \"class\")= chr \"lm\""
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#accessing-elements-with",
     "href": "PSY6422_Models_BonusLecture.html#accessing-elements-with",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Accessing elements with $",
     "text": "Accessing elements with $\n\nModel objects are lists, so we can pull out elements by name.\n\n\nout$coefficients # estimated parameters\n\n      (Intercept)         gdpPercap               pop continentAmericas \n     4.781408e+01      4.495058e-04      6.569823e-09      1.347594e+01 \n    continentAsia   continentEurope  continentOceania \n     8.192632e+00      1.747269e+01      1.808330e+01 \n\nout$residuals[1:10] # first 10 residuals\n\n        1         2         3         4         5         6         7         8 \n-27.61143 -26.10440 -24.46064 -22.43839 -20.33727 -18.01983 -16.67696 -15.65898 \n        9        10 \n-14.73180 -14.67533 \n\nout$fitted.values[1:10] # first 10 fitted values\n\n       1        2        3        4        5        6        7        8 \n56.41243 56.43640 56.45764 56.45839 56.42527 56.45783 56.53096 56.48098 \n       9       10 \n56.40580 56.43833"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#compare-summary-vs-object-contents",
     "href": "PSY6422_Models_BonusLecture.html#compare-summary-vs-object-contents",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Compare: Summary vs Object Contents",
     "text": "Compare: Summary vs Object Contents\n\nsummary(out) prints a tidy overview, but not all stored information. Think of it like an executive summary report.\n\nout itself contains far more details. Think of it like the filing cabinet with all the documents."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#importance-of-models-and-objects-for-visualisation",
     "href": "PSY6422_Models_BonusLecture.html#importance-of-models-and-objects-for-visualisation",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Importance of Models and Objects for Visualisation",
     "text": "Importance of Models and Objects for Visualisation\n\n\nTo plot model results with ggplot2, we often need tidy tables (data frames / tibbles)."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#the-broom-package",
     "href": "PSY6422_Models_BonusLecture.html#the-broom-package",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "The broom Package",
     "text": "The broom Package\n\nbroom can tidily extract three kinds of information:\n\n\nComponent-level information about aspects of the model itself (e.g., coefficients, SEs, p-values)\nObservation-level information about the model’s connection to the underlying data (e.g., fitted values, residuals)\nModel-level information that summarises the fit as a whole (e.g., \\(R^2\\), AIC)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#component-level-statistics-with-tidy",
     "href": "PSY6422_Models_BonusLecture.html#component-level-statistics-with-tidy",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Component-Level Statistics with tidy()",
     "text": "Component-Level Statistics with tidy()\n\nThe tidy() function takes a model object and returns a data frame of component-level information. Each row is equal to one parameter estimate and columns are consistent across models (estimate, std.error, statistic, p.value)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#component-level-statistics-with-tidy-1",
     "href": "PSY6422_Models_BonusLecture.html#component-level-statistics-with-tidy-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Component-Level Statistics with tidy()",
     "text": "Component-Level Statistics with tidy()\n\nHere’s an example of the default results that tidy() returns. For a cleaner output, we can pipe the object we create with tidy() through a function that rounds the numeric columns of the data frame to three decimal places.\n\n\nout_comp &lt;- tidy(out)\nout_comp %&gt;% round_df(dig = 3)\n\n# A tibble: 7 × 5\n  term              estimate std.error statistic p.value\n  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1 (Intercept)          47.8      0.34     141.     0    \n2 gdpPercap             0        0         19.2    0    \n3 pop                   0        0          3.33   0.001\n4 continentAmericas    13.5      0.6       22.5    0    \n5 continentAsia         8.19     0.571     14.3    0    \n6 continentEurope      17.5      0.625     28.0    0    \n7 continentOceania     18.1      1.78      10.1    0"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#component-level-statistics-with-tidy-2",
     "href": "PSY6422_Models_BonusLecture.html#component-level-statistics-with-tidy-2",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Component-Level Statistics with tidy()",
     "text": "Component-Level Statistics with tidy()\n\nNow we can treat this data frame like other data frames we have seen so far in ggplot\n\n\np &lt;- ggplot(out_comp, mapping = aes(x = term, y = estimate)) +\n  geom_point() + coord_flip() +\n  theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#component-level-statistics-with-tidy-3",
     "href": "PSY6422_Models_BonusLecture.html#component-level-statistics-with-tidy-3",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Component-Level Statistics with tidy()",
     "text": "Component-Level Statistics with tidy()\n\nWe can call additional arguments in tidy(), like conf.int to calculate confidence intervals for the estimates.\n\nout_conf &lt;- tidy(out, conf.int = TRUE)\nout_conf %&gt;% round_df()\n\n\np &lt;- ggplot(out_conf, mapping = aes(x = term, y = estimate, \n                                    ymin = conf.low, ymax = conf.high)) +\n  geom_pointrange() + coord_flip() + \n  theme_bw()\n\nprint(p)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#observation-level-statistics-with-augment",
     "href": "PSY6422_Models_BonusLecture.html#observation-level-statistics-with-augment",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Observation-Level Statistics with augment()",
     "text": "Observation-Level Statistics with augment()\n\nValues returned by augment() are at the level of the original observations. They can be added to the dta frame that the model is based on.\n\nCalling augment() will return a data frame with the original observations in the estimation model as well as fitted values (.fitted), standard errors of fitted values (.se.fit), residuals (.resid), the diagonal of the hat matrix (.hat), an estimate of residual SD when the corresponding observation is dropped from the model (sigma), Cook’s distance (.cooksd), and the standardised residuals (.std.resid)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#observation-level-statistics-with-augment-1",
     "href": "PSY6422_Models_BonusLecture.html#observation-level-statistics-with-augment-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Observation-Level Statistics with augment()",
     "text": "Observation-Level Statistics with augment()\n\n\nout_aug &lt;- augment(out)\nhead(out_aug) %&gt;% round_df(dig = 3)\n\n# A tibble: 6 × 10\n  lifeExp gdpPercap      pop continent .fitted .resid  .hat .sigma .cooksd\n    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n1    28.8      779.  8425333 Asia         56.4  -27.6 0.003   8.34   0.005\n2    30.3      821.  9240934 Asia         56.4  -26.1 0.003   8.34   0.004\n3    32.0      853. 10267083 Asia         56.5  -24.5 0.003   8.35   0.004\n4    34.0      836. 11537966 Asia         56.5  -22.4 0.003   8.35   0.003\n5    36.1      740. 13079460 Asia         56.4  -20.3 0.003   8.35   0.003\n6    38.4      786. 14880372 Asia         56.5  -18.0 0.003   8.36   0.002\n# ℹ 1 more variable: .std.resid &lt;dbl&gt;"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#observation-level-statistics-with-augment-2",
     "href": "PSY6422_Models_BonusLecture.html#observation-level-statistics-with-augment-2",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Observation-Level Statistics with augment()",
     "text": "Observation-Level Statistics with augment()\n\nBy default augment() will extract the variables used in the model itself. Additional variables from the original data frame can be added by specifying the data argument.\n\n\nout_aug &lt;- augment(out, data = gapminder)\nhead(out_aug) %&gt;% round_df(dig = 3)\n\n# A tibble: 6 × 12\n  country   continent  year lifeExp    pop gdpPercap .fitted .resid  .hat .sigma\n  &lt;fct&gt;     &lt;fct&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n1 Afghanis… Asia       1952    28.8 8.43e6      779.    56.4  -27.6 0.003   8.34\n2 Afghanis… Asia       1957    30.3 9.24e6      821.    56.4  -26.1 0.003   8.34\n3 Afghanis… Asia       1962    32.0 1.03e7      853.    56.5  -24.5 0.003   8.35\n4 Afghanis… Asia       1967    34.0 1.15e7      836.    56.5  -22.4 0.003   8.35\n5 Afghanis… Asia       1972    36.1 1.31e7      740.    56.4  -20.3 0.003   8.35\n6 Afghanis… Asia       1977    38.4 1.49e7      786.    56.5  -18.0 0.003   8.36\n# ℹ 2 more variables: .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#observation-level-statistics-with-augment-3",
     "href": "PSY6422_Models_BonusLecture.html#observation-level-statistics-with-augment-3",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Observation-Level Statistics with augment()",
     "text": "Observation-Level Statistics with augment()\n\nWe can use the new columns from augment() to create standard regression plots.\n\nFor example, here we plot residuals versus fitted values.\n\np &lt;- ggplot(data = out_aug,\n            mapping = aes(x = .fitted, y = .resid))\np + geom_point()"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#model-level-statistics-with-glance",
     "href": "PSY6422_Models_BonusLecture.html#model-level-statistics-with-glance",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Model-Level Statistics with glance",
     "text": "Model-Level Statistics with glance\nBy itself, glance() produces a one-row tibble with model-level metrics. It’s useful for comparing models based on \\(R^2\\), AIC, BIC, etc.\n\n\nglance(out) %&gt;% round_df(dig = 3)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik    AIC    BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1     0.582         0.581  8.36      394.       0     6 -6034. 12084. 12127.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;dbl&gt;, nobs &lt;dbl&gt;"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#why-does-broom-matter-for-visualisation",
     "href": "PSY6422_Models_BonusLecture.html#why-does-broom-matter-for-visualisation",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Why Does broom Matter for Visualisation?",
     "text": "Why Does broom Matter for Visualisation?\n\nbroom makes it possible fit models to different subsets of data and get usable tables of results in return.\n Let’s see broom in action by looking at the relation between life expectancy (lifeExp) and GDP (gdpPercap) by continent (continent)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#example-life-expectancy-and-gdp-by-continent",
     "href": "PSY6422_Models_BonusLecture.html#example-life-expectancy-and-gdp-by-continent",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Example: Life Expectancy and GDP by Continent",
     "text": "Example: Life Expectancy and GDP by Continent\n\nOur gapfinder data has data organised by continent and year. If we wanted to look at just Europe in 1977 we might take a slide of our data manually like so:\n\neu77 &lt;- gapminder %&gt;% filter(continent == \"Europe\", year == 1977)\nsummary(eu77)\n\n                   country      continent       year         lifeExp     \n Albania               : 1   Africa  : 0   Min.   :1977   Min.   :59.51  \n Austria               : 1   Americas: 0   1st Qu.:1977   1st Qu.:70.50  \n Belgium               : 1   Asia    : 0   Median :1977   Median :72.33  \n Bosnia and Herzegovina: 1   Europe  :30   Mean   :1977   Mean   :71.94  \n Bulgaria              : 1   Oceania : 0   3rd Qu.:1977   3rd Qu.:73.79  \n Croatia               : 1                 Max.   :1977   Max.   :76.11  \n (Other)               :24                                               \n      pop             gdpPercap    \n Min.   :  221823   Min.   : 3528  \n 1st Qu.: 4423730   1st Qu.:10360  \n Median : 8741694   Median :14226  \n Mean   :17238818   Mean   :14284  \n 3rd Qu.:19707195   3rd Qu.:19052  \n Max.   :78160773   Max.   :26982"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#example-life-expectancy-and-gdp-by-continent-1",
     "href": "PSY6422_Models_BonusLecture.html#example-life-expectancy-and-gdp-by-continent-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Example: Life Expectancy and GDP by Continent",
     "text": "Example: Life Expectancy and GDP by Continent\n\nThen we could see the relationship between life expectancy (lifeExp) and GDP (gdpPercap) for that continent-year group:\n\nfit &lt;- lm(lifeExp ~ log(gdpPercap), data = eu77)\nsummary(fit)\n\n\nCall:\nlm(formula = lifeExp ~ log(gdpPercap), data = eu77)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-7.4956 -1.0306  0.0935  1.1755  3.7125 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)      29.489      7.161   4.118 0.000306 ***\nlog(gdpPercap)    4.488      0.756   5.936 2.17e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.114 on 28 degrees of freedom\nMultiple R-squared:  0.5572,    Adjusted R-squared:  0.5414 \nF-statistic: 35.24 on 1 and 28 DF,  p-value: 2.173e-06"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
     "text": "broom Example: Life Expectancy and GDP by Continent\n\nWith dplyr and broom we can do this for every continent-year slide of the data in a compact and tidy way.\n\nTo perform a grouped analysis, we start by grouping our data and then “nesting” it. - group_by() organises the data by the specified columns (continent and year) - nest() bundles the data for each group into a single column, creating a list column.\n\nThe result is a tibble where each row represents a continent-year group and contains a mini-tibble of the data for that group."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-1",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
     "text": "broom Example: Life Expectancy and GDP by Continent\n\n\nout_le &lt;- gapminder %&gt;% \n  group_by(continent, year) %&gt;%\n  nest()\nout_le\n\n# A tibble: 60 × 3\n# Groups:   continent, year [60]\n   continent  year data             \n   &lt;fct&gt;     &lt;int&gt; &lt;list&gt;           \n 1 Asia       1952 &lt;tibble [33 × 4]&gt;\n 2 Asia       1957 &lt;tibble [33 × 4]&gt;\n 3 Asia       1962 &lt;tibble [33 × 4]&gt;\n 4 Asia       1967 &lt;tibble [33 × 4]&gt;\n 5 Asia       1972 &lt;tibble [33 × 4]&gt;\n 6 Asia       1977 &lt;tibble [33 × 4]&gt;\n 7 Asia       1982 &lt;tibble [33 × 4]&gt;\n 8 Asia       1987 &lt;tibble [33 × 4]&gt;\n 9 Asia       1992 &lt;tibble [33 × 4]&gt;\n10 Asia       1997 &lt;tibble [33 × 4]&gt;\n# ℹ 50 more rows"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-2",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-2",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
     "text": "broom Example: Life Expectancy and GDP by Continent\n\nOnce the data is nested, we can use purrr: map() to apply a function to each row of the list colun. This is a powerful, compact alternative to a for loop.\n\nCreate a function to fit the linear model.\nUse mutate() to aadd a new list column called model.\nUse map() to apply the fit_ols() function to each nested data tibble in the data list column."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-3",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-3",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
     "text": "broom Example: Life Expectancy and GDP by Continent\n\n\nfit_ols &lt;- function(df) {\n  lm(lifeExp ~ log(gdpPercap), data = df)\n}\n\nout_le &lt;- gapminder %&gt;%\n  group_by(continent, year) %&gt;%\n  nest() %&gt;%\n  mutate(model = map(data, fit_ols))\nout_le\n\n# A tibble: 60 × 4\n# Groups:   continent, year [60]\n   continent  year data              model \n   &lt;fct&gt;     &lt;int&gt; &lt;list&gt;            &lt;list&gt;\n 1 Asia       1952 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n 2 Asia       1957 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n 3 Asia       1962 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n 4 Asia       1967 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n 5 Asia       1972 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n 6 Asia       1977 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n 7 Asia       1982 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n 8 Asia       1987 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n 9 Asia       1992 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n10 Asia       1997 &lt;tibble [33 × 4]&gt; &lt;lm&gt;  \n# ℹ 50 more rows"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-4",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-4",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
     "text": "broom Example: Life Expectancy and GDP by Continent\n\nThe model list column now contains a linear model for each continent-year group. To make the results usable, we can “tidy” and “unnest” them.\n\nUse broom::tidy() to extract key summary statistics (e.g., estimates, standard errors, p-values) from each model.\nUse unnest() to expand the tidied list column back into a regular tibble."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-5",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-5",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
     "text": "broom Example: Life Expectancy and GDP by Continent\n\nFirst we extract summary statistics from each model by mapping the tidy() function from broom to the model list column. Then we unnest the result, dropping the other columns in the process. We filter out all the Intercept terms (out of convenience), and also drop all observations from Oceania (because too few observations). We put the results in an object called out_tidy.\n\nfit_ols &lt;- function(df) {\n  lm(lifeExp ~ log(gdpPercap), data = df)\n}\n\nout_tidy &lt;- gapminder %&gt;%\n  group_by(continent, year) %&gt;%\n  nest() %&gt;%\n  mutate(model = map(data, fit_ols),\n         tidied = map(model, tidy)) %&gt;%\n  unnest(tidied, .drop = TRUE) %&gt;%\n  filter(term %nin% \"(Intercept)\" &\n         continent %nin% \"Oceania\")\n\nout_tidy %&gt;%\n  ungroup() %&gt;%\n  sample_n(5)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-6",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-6",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
-    "text": "broom Example: Life Expectancy and GDP by Continent\n\n\n\n# A tibble: 5 × 9\n  continent  year data     model  term      estimate std.error statistic p.value\n  &lt;fct&gt;     &lt;int&gt; &lt;list&gt;   &lt;list&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1 Asia       2002 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     5.44     0.696      7.82 8.05e-9\n2 Africa     1982 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     5.61     0.898      6.25 8.79e-8\n3 Africa     1967 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     3.07     0.988      3.11 3.13e-3\n4 Africa     1997 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     6.89     1.04       6.64 2.16e-8\n5 Europe     2002 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     3.74     0.445      8.40 3.91e-9"
+    "text": "broom Example: Life Expectancy and GDP by Continent\n\n\n\n# A tibble: 5 × 9\n  continent  year data     model  term      estimate std.error statistic p.value\n  &lt;fct&gt;     &lt;int&gt; &lt;list&gt;   &lt;list&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1 Asia       1982 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     4.78     0.852      5.61 3.77e-6\n2 Africa     1957 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     2.69     1.06       2.55 1.40e-2\n3 Asia       1967 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     4.50     1.15       3.90 4.77e-4\n4 Americas   1987 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     7.10     1.14       6.25 2.22e-6\n5 Americas   2002 &lt;tibble&gt; &lt;lm&gt;   log(gdpP…     5.05     0.844      5.99 4.18e-6"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-7",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-7",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
     "text": "broom Example: Life Expectancy and GDP by Continent\n\nWith our data in a tidy format, we can now plot the results to visualise the relations we’ve modelled.\n\nLet’s plot the estimated coefficient for the relation between log GDP per capita and life expectancy for each continent and year.\n\np &lt;- ggplot(data = out_tidy,\n            mapping = aes(x = year, y = estimate,\n                          ymin = estimate - 2*std.error,\n                          ymax = estimate + 2*std.error,\n                          group = continent, color = continent)) +\n  geom_pointrange(position = position_dodge(width = 1)) +\n    scale_x_continuous(breaks = unique(gapminder$year)) +\n    theme(legend.position = \"top\") +\n    labs(x = \"Year\", y = \"Estimate\", color = \"Continent\") + \n  theme_bw()"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-8",
     "href": "PSY6422_Models_BonusLecture.html#broom-example-life-expectancy-and-gdp-by-continent-8",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "broom Example: Life Expectancy and GDP by Continent",
     "text": "broom Example: Life Expectancy and GDP by Continent"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#the-challenge-of-survey-data",
     "href": "PSY6422_Models_BonusLecture.html#the-challenge-of-survey-data",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "The Challenge of Survey Data",
     "text": "The Challenge of Survey Data\n\nSocial science data often comes from complex surveys. These datasets require specialized tools to correctly account for:\n\nReplicate weights: To make the sample representative of a larger population.\nClustered structure: Observations are often nested within geographical or other units.\nStratification: The population is divided into groups, and samples are drawn from each.\n\nThe survey package handles this, but the helper package srvyr lets us use its functions within a familiar tidyverse pipeline."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#setting-up-the-survey-design",
     "href": "PSY6422_Models_BonusLecture.html#setting-up-the-survey-design",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Setting Up the Survey Design",
     "text": "Setting Up the Survey Design\n\nWe begin by creating a survey object that contains our data along with the design information. This lets us use the specialized functions from the survey library.\nas_survey_design() is the key function here.\n\noptions(survey.lonely.psu = \"adjust\")\noptions(na.action=\"na.pass\")\n\ngss_wt &lt;- subset(gss_lon, year &gt; 1974) %&gt;%\n    mutate(stratvar = interaction(year, vstrat)) %&gt;%\n    as_survey_design(ids = vpsu,\n                     strata = stratvar,\n                     weights = wtssall,\n                     nest = TRUE)"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#calculating-weighted-proportions",
     "href": "PSY6422_Models_BonusLecture.html#calculating-weighted-proportions",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Calculating Weighted Proportions",
     "text": "Calculating Weighted Proportions\n\nOnce the gss_wt object is created, we can use survey_mean() within a summarize() call to calculate weighted proportions and their standard errors.\nWe can apply this to different groups (e.g., race, education) across years.\n\nout_grp &lt;- gss_wt %&gt;%\n    filter(year %in% seq(1976, 2016, by = 4)) %&gt;%\n    group_by(year, race, degree) %&gt;%\n    summarize(prop = survey_mean(na.rm = TRUE))\nout_grp\n\n# A tibble: 162 × 5\n# Groups:   year, race [30]\n    year race  degree            prop prop_se\n   &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;            &lt;dbl&gt;   &lt;dbl&gt;\n 1  1976 White Lt High School 0.327   0.0160 \n 2  1976 White High School    0.517   0.0161 \n 3  1976 White Junior College 0.0128  0.00298\n 4  1976 White Bachelor       0.101   0.00955\n 5  1976 White Graduate       0.0392  0.00642\n 6  1976 White &lt;NA&gt;           0.00285 0.00151\n 7  1976 Black Lt High School 0.558   0.0603 \n 8  1976 Black High School    0.335   0.0476 \n 9  1976 Black Junior College 0.0423  0.0192 \n10  1976 Black Bachelor       0.0577  0.0238 \n# ℹ 152 more rows"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#plotting-with-uncertainty",
     "href": "PSY6422_Models_BonusLecture.html#plotting-with-uncertainty",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Plotting with Uncertainty",
     "text": "Plotting with Uncertainty\n\nThe out_grp data frame contains the proportions and their standard errors (prop_se). We can use this information to create plots that show not just the point estimates but also the associated uncertainty.\nThe first plot, a “dynamite plot,” uses columns and error bars.\n\np &lt;- ggplot(data = subset(out_grp, race %nin% \"Other\"),\n            mapping = aes(x = degree, y = prop,\n                          ymin = prop - 2*prop_se,\n                          ymax = prop + 2*prop_se,\n                          fill = race,\n                          color = race,\n                          group = race))\ndodge &lt;- position_dodge(width=0.9)\np + geom_col(position = dodge, alpha = 0.2) +\n    geom_errorbar(position = dodge, width = 0.2) +\n    scale_x_discrete(labels = scales::wrap_format(10)) +\n    scale_y_continuous(labels = scales::percent) +\n    scale_color_brewer(type = \"qual\", palette = \"Dark2\") +\n    scale_fill_brewer(type = \"qual\", palette = \"Dark2\") +\n    labs(title = \"Educational Attainment by Race\",\n         subtitle = \"GSS 1976-2016\",\n         fill = \"Race\",\n         color = \"Race\",\n         x = NULL, y = \"Percent\") +\n    facet_wrap(~ year, ncol = 2) +\n    theme(legend.position = \"top\")"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#plotting-with-uncertainty-1",
     "href": "PSY6422_Models_BonusLecture.html#plotting-with-uncertainty-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "Plotting with Uncertainty",
     "text": "Plotting with Uncertainty\n\nThe out_grp data frame contains the proportions and their standard errors (prop_se). We can use this information to create plots that show not just the point estimates but also the associated uncertainty.\nThe first plot, a “dynamite plot,” uses columns and error bars."
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#a-better-way-time-series-trends",
     "href": "PSY6422_Models_BonusLecture.html#a-better-way-time-series-trends",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "A Better Way: Time-Series Trends",
     "text": "A Better Way: Time-Series Trends\n\nWhen plotting trends over time, using lines is often more effective than bars.\nThis alternative plot facets by educational degree and plots year on the x-axis, allowing for easier comparison of time trends across different racial groups.\n\n#| fig.width: 8\n#| fig.height: 12\np &lt;- ggplot(data = subset(out_grp, race %nin% \"Other\" & !is.na(degree)),\n            mapping = aes(x = year, y = prop, ymin = prop - 2*prop_se,\n                          ymax = prop + 2*prop_se, fill = race, color = race,\n                          group = race))\np + geom_ribbon(alpha = 0.3, aes(color = NULL)) +\n    geom_line() +\n    facet_wrap(~ degree, ncol = 1) +\n    scale_y_continuous(labels = scales::percent) +\n    scale_color_brewer(type = \"qual\", palette = \"Dark2\") +\n    scale_fill_brewer(type = \"qual\", palette = \"Dark2\") +\n    labs(title = \"Educational Attainment\\nby Race\",\n         subtitle = \"GSS 1976-2016\", fill = \"Race\",\n         color = \"Race\", x = NULL, y = \"Percent\") +\n    theme(legend.position = \"top\")"
   },
   {
     "objectID": "PSY6422_Models_BonusLecture.html#a-better-way-time-series-trends-1",
     "href": "PSY6422_Models_BonusLecture.html#a-better-way-time-series-trends-1",
-    "title": "PSY6422 - Data Analysis & Visualisation",
+    "title": "PSY6422 - Data Management & Visualisation",
     "section": "A Better Way: Time-Series Trends",
     "text": "A Better Way: Time-Series Trends"
   }
