@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/*-- scss:defaults --*/
+/* Make sure reveal container fills viewport */
+.reveal {
+  height: 100vh !important;
+  overflow: hidden;
+  background: white; /* or your preferred bg */
+}
+
+/* Make slides container fill viewport height */
+.reveal .slides {
+  height: 100vh !important;
+  transform-origin: top center !important;
+  overflow: visible !important;
+}
+
+/* Make individual slides auto height and no max height to avoid clipping */
+.reveal .slides section {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding: 0.5rem 2rem !important;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* --------------------------
+   Bullet font sizes by level
+   -------------------------- */
+.reveal ul {
+  font-size: 1.1em;
+  list-style-type: disc; /* Top level: disc */
+  margin-left: 1.2em;
+}
+
+.reveal ul ul {
+  font-size: 0.95em;
+  list-style-type: circle; /* Second level: circle */
+  margin-left: 1.2em;
+}
+
+.reveal ul ul ul {
+  font-size: 0.85em;
+  list-style-type: square; /* Third level: square */
+  margin-left: 1.2em;
+}
+
+.reveal ul ul ul ul {
+  font-size: 0.75em;
+  list-style-type: "– "; /* Fourth level: en dash */
+  margin-left: 1.2em;
+}
+
+.reveal ul ul ul ul ul {
+  font-size: 0.7em;
+  list-style-type: "• "; /* Fifth level: bullet */
+  margin-left: 1.2em;
+}
+
+/* If you go deeper, keep shrinking font */
+.reveal ul ul ul ul ul ul {
+  font-size: 0.65em;
+  list-style-type: "◦ ";
+  margin-left: 1.2em;
+}
+
+/* Images scaling */
+.reveal img {
+  max-width: 90%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+/*# sourceMappingURL=theme.css.map */
