@@ -1558,7 +1558,7 @@
     "href": "PSY6422_Week1_Lecture1.html#the-wrap-up-self-assessment---submission-criteria",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "The Wrap-Up Self-Assessment - Submission & Criteria",
-    "text": "The Wrap-Up Self-Assessment - Submission & Criteria\n\nYou must submit a PDF document via the Blackboard submission portal\n\nYour self-assessment should be no more than one A4 page (i.e., &lt;500 words)\n\nYou will complete this assessment using the template found in the Markdown file PSY6422_wrapup_self_assessment.qmd\n\nThe deadline for this assessment is Friday 11th December at 14:00\n\nTo receive full marks, you will need to adequately address the questions in the template"
+    "text": "The Wrap-Up Self-Assessment - Submission & Criteria\n\nYou must submit a PDF document via the Blackboard submission portal\n\nYour self-assessment should be no more than one A4 page (i.e., &lt;500 words)\n\nYou will complete this assessment using the template found in the Markdown file PSY6422_wrapup_self_assessment.qmd\n\nThe deadline for this assessment is Friday 18th December at 14:00\n\nTo receive full marks, you will need to adequately address the questions in the template"
   },
   {
     "objectID": "PSY6422_Week1_Lecture1.html#the-mini-project---about",
@@ -1579,7 +1579,7 @@
     "href": "PSY6422_Week1_Lecture1.html#the-mini-project---submission",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "The Mini Project - Submission",
-    "text": "The Mini Project - Submission\n\nYou must submit an RMarkdown/Quarto file and a GitHub link via the Blackboard submission portal\n\nThe deadline for this assessment is Friday 11th December at 14:00"
+    "text": "The Mini Project - Submission\n\nYou must submit an RMarkdown/Quarto file and a GitHub link via the Blackboard submission portal\n\nThe deadline for this assessment is Friday 18th December at 14:00"
   },
   {
     "objectID": "PSY6422_Week1_Lecture1.html#the-mini-project---project-requirements",
@@ -1677,7 +1677,7 @@
     "href": "PSY6422_Week1_Lecture1.html#text-vs.-numbers-in-the-console",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Text vs. Numbers in the Console",
-    "text": "Text vs. Numbers in the Console\n\n\nR needs to know whether a value is text or a mathematical number\nCharacters (Text): Must always be wrapped in quotes \" \"\nNumeric: Written as plain numbers without quotes\n\n\n# This works because it is recognised as text data\n\"Sabrina\" \n\n[1] \"Sabrina\"\n\n# This will throw an error! \n# R thinks Sabrina is an object name and searches the environment for it\nSabrina \n\nError in eval(expr, envir, enclos): object 'Sabrina' not found"
+    "text": "Text vs. Numbers in the Console\n\n\nR needs to know whether a value is text or a mathematical number\nCharacters (Text): Must always be wrapped in quotes \" \"\nNumeric: Written as plain numbers without quotes\n\n\n# This works because it is recognised as text data\n\"Sabrina\" \n\n[1] \"Sabrina\"\n\n# This will throw an error! \n# R thinks Sabrina is an object name and searches the environment for it\nSabrina \n\nError:\n! object 'Sabrina' not found"
   },
   {
     "objectID": "PSY6422_Week1_Lecture1.html#object-assignment",
@@ -1733,7 +1733,7 @@
     "href": "PSY6422_Week1_Lecture1.html#a-quick-warning-r-is-case-sensitive",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "A Quick Warning: R is Case-Sensitive",
-    "text": "A Quick Warning: R is Case-Sensitive\n\n\nR treats capital letters and lowercase letters as completely different things\nThis applies to both object names and functions\n\n\n\n# Creating a lowercase object\nmy_age &lt;- 21\n\n# This will throw an error because of the capital 'M'\nMy_age \n\nError in eval(expr, envir, enclos): object 'My_age' not found\n\n# This will throw an error because R only knows lowercase mean()\nMean(c(1, 2, 3))\n\nError in Mean(c(1, 2, 3)): could not find function \"Mean\""
+    "text": "A Quick Warning: R is Case-Sensitive\n\n\nR treats capital letters and lowercase letters as completely different things\nThis applies to both object names and functions\n\n\n\n# Creating a lowercase object\nmy_age &lt;- 21\n\n# This will throw an error because of the capital 'M'\nMy_age \n\nError:\n! object 'My_age' not found\n\n# This will throw an error because R only knows lowercase mean()\nMean(c(1, 2, 3))\n\nError in `Mean()`:\n! could not find function \"Mean\""
   },
   {
     "objectID": "PSY6422_Week1_Lecture1.html#how-to-ask-r-for-help",

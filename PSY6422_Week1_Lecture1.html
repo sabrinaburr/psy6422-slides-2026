@@ -332,7 +332,7 @@ Dr Sabrina Burr
 <p><br></p>
 <p>You will complete this assessment using the <span style="color: blue">template</span> found in the Markdown file <span style="color: green">PSY6422_wrapup_self_assessment.qmd</span></p>
 <p><br></p>
-<p>The deadline for this assessment is <span style="color: blue">Friday 11th December at 14:00</span></p>
+<p>The deadline for this assessment is <span style="color: blue">Friday 18th December at 14:00</span></p>
 <p><br></p>
 <p>To receive full marks, you will need to adequately address the questions in the template</p>
 </section>
@@ -360,7 +360,7 @@ Dr Sabrina Burr
 <p><br></p>
 <p>You must submit an <span style="color: blue">RMarkdown/Quarto</span> file and a <span style="color: blue">GitHub link</span> via the <span style="color: blue">Blackboard submission portal</span></p>
 <p><br></p>
-<p>The deadline for this assessment is <span style="color: blue">Friday 11th December at 14:00</span></p>
+<p>The deadline for this assessment is <span style="color: blue">Friday 18th December at 14:00</span></p>
 </section>
 <section id="the-mini-project---project-requirements" class="slide level2">
 <h2>The Mini Project - Project Requirements</h2>
@@ -640,7 +640,8 @@ Dr Sabrina Burr
 <span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a><span class="co"># R thinks Sabrina is an object name and searches the environment for it</span></span>
 <span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a>Sabrina </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'Sabrina' not found</code></pre>
+<pre><code>Error:
+! object 'Sabrina' not found</code></pre>
 </div>
 </div>
 </section>
@@ -879,12 +880,14 @@ Dr Sabrina Burr
 <span id="cb36-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This will throw an error because of the capital 'M'</span></span>
 <span id="cb36-5"><a aria-hidden="true" tabindex="-1"></a>My_age </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'My_age' not found</code></pre>
+<pre><code>Error:
+! object 'My_age' not found</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This will throw an error because R only knows lowercase mean()</span></span>
 <span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">Mean</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in Mean(c(1, 2, 3)): could not find function "Mean"</code></pre>
+<pre><code>Error in `Mean()`:
+! could not find function "Mean"</code></pre>
 </div>
 </div>
 </section>
