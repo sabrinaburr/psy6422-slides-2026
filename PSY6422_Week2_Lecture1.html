@@ -389,11 +389,14 @@ Dr Sabrina Burr
 <p>Now we can load our csv file into R using the <code>fread()</code> function from the <code>data.table</code> package. If you saved your data and script in a project folder, you won’t need to provide the whole path to the data. We will call this dataset <code>penguins</code>.</p>
 <p>For best practice, (install and) load the <code>here</code> package.</p>
 <div class="cell my-custom-code-size">
+
+</div>
+<div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Calling data using "here" and "data.table" packages + an RStudio project</span></span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Datasets is the name of the subfolder within my project folder</span></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="co"># penguins.csv is the name of the csv file, stored in the Datasets folder</span></span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">'../Datasets/penguins.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="fu">here</span>(<span class="st">"Datasets"</span>, <span class="st">"penguins.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <div class="cell my-custom-code-size">
