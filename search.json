@@ -122,8 +122,8 @@
     "objectID": "PSY6422_Week2_Lecture1.html#where-can-i-find-data-for-my-project",
     "href": "PSY6422_Week2_Lecture1.html#where-can-i-find-data-for-my-project",
     "title": "PSY6422 - Data Management & Visualisation",
-    "section": "Where Can I find Data for My Project?",
-    "text": "Where Can I find Data for My Project?\n\nThere are many places you can look to find data for your mini project\n\nCurrent supervisors\nSingle papers with open data\nData repositories (e.g., ONS)"
+    "section": "Where Can I Find Data for My Project?",
+    "text": "Where Can I Find Data for My Project?\n\nThere are many places you can look to find data for your mini project\n\nCurrent or past supervisors\nSingle papers with open data\nData repositories (e.g., ONS)"
   },
   {
     "objectID": "PSY6422_Week2_Lecture1.html#papers-with-open-data",
@@ -200,7 +200,7 @@
     "href": "PSY6422_Week2_Lecture1.html#reading-in-csv-file",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Reading in csv File",
-    "text": "Reading in csv File\n\nNow we can load our csv file into R using the fread() function from the data.table package. If you saved your data and script in a project folder, you won’t need to provide the whole path to the data. We will call this dataset penguins.\nFor best practice, (install and) load the here package.\n\n# Example: Calling data using \"here\" and \"data.table\" packages + an RStudio project\n# Datasets is the name of the subfolder within my project folder\n# penguins.csv is the name of the csv file, stored in the Datasets folder\nlibrary(here)\npenguins &lt;- fread(here(\"Datasets\", \"penguins.csv\"))\n\n\n\n# Example: Calling data using the \"data.table\" package + RStudio project\npenguins &lt;- fread(\"Datasets/penguins.csv\")\n\n\n\n# Example: Calling data using the \"data.table\" package and full file path\n# This is the least recommended way\npenguins &lt;- fread(\"/Users/sabrinaburr/Desktop/PSY6422/Datasets/penguins.csv\")"
+    "text": "Reading in csv File\n\nNow we can load our csv file into R using the fread() function from the data.table package. If you saved your data and script in a project folder, you won’t need to provide the whole path to the data. We will call this dataset penguins.\nFor best practice, (install and) load the here package.\n\n# Example: Calling data using \"here\" and \"data.table\" packages + an RStudio project\n# Datasets is the name of the subfolder within my project folder\n# penguins.csv is the name of the csv file, stored in the Datasets folder\nlibrary(here)\npenguins &lt;- fread('../Datasets/penguins.csv')\n\n\n\n# Example: Calling data using the \"data.table\" package + RStudio project\npenguins &lt;- fread(\"Datasets/penguins.csv\")\n\n\n\n# Example: Calling data using the \"data.table\" package and full file path\n# This is the least recommended way\npenguins &lt;- fread(\"/Users/sabrinaburr/Desktop/PSY6422/Datasets/penguins.csv\")"
   },
   {
     "objectID": "PSY6422_Week2_Lecture1.html#summary-of-data",
@@ -214,35 +214,35 @@
     "href": "PSY6422_Week2_Lecture1.html#summary-of-data-1",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Summary of Data",
-    "text": "Summary of Data\n\n\nsummary(penguins) # summary of our data table\n\n&lt; table of extent 0 x 0 &gt;"
+    "text": "Summary of Data\n\n\nsummary(penguins) # summary of our data table\n\n       V1           species             island          bill_length_mm \n Min.   :  1.00   Length:344         Length:344         Min.   :32.10  \n 1st Qu.: 86.75   Class :character   Class :character   1st Qu.:39.23  \n Median :172.50   Mode  :character   Mode  :character   Median :44.45  \n Mean   :172.50                                         Mean   :43.92  \n 3rd Qu.:258.25                                         3rd Qu.:48.50  \n Max.   :344.00                                         Max.   :59.60  \n                                                        NA's   :2      \n bill_depth_mm   flipper_length_mm  body_mass_g       sex           \n Min.   :13.10   Min.   :172.0     Min.   :2700   Length:344        \n 1st Qu.:15.60   1st Qu.:190.0     1st Qu.:3550   Class :character  \n Median :17.30   Median :197.0     Median :4050   Mode  :character  \n Mean   :17.15   Mean   :200.9     Mean   :4202                     \n 3rd Qu.:18.70   3rd Qu.:213.0     3rd Qu.:4750                     \n Max.   :21.50   Max.   :231.0     Max.   :6300                     \n NA's   :2       NA's   :2         NA's   :2                        \n      year     \n Min.   :2007  \n 1st Qu.:2007  \n Median :2008  \n Mean   :2008  \n 3rd Qu.:2009  \n Max.   :2009"
   },
   {
     "objectID": "PSY6422_Week2_Lecture1.html#column-names",
     "href": "PSY6422_Week2_Lecture1.html#column-names",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Column Names",
-    "text": "Column Names\n\nIf we want to know the column names (i.e., variable names) in our table, we can use the function names()\n\n\nnames(penguins) # names of columns/variables\n\ncharacter(0)"
+    "text": "Column Names\n\nIf we want to know the column names (i.e., variable names) in our table, we can use the function names()\n\n\nnames(penguins) # names of columns/variables\n\n[1] \"V1\"                \"species\"           \"island\"           \n[4] \"bill_length_mm\"    \"bill_depth_mm\"     \"flipper_length_mm\"\n[7] \"body_mass_g\"       \"sex\"               \"year\""
   },
   {
     "objectID": "PSY6422_Week2_Lecture1.html#dimensions-of-the-data",
     "href": "PSY6422_Week2_Lecture1.html#dimensions-of-the-data",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Dimensions of the Data",
-    "text": "Dimensions of the Data\n\nIf we want to know the number or rows and columns we can use the dim() function\n\n\ndim(penguins) # number or rows and columns in data\n\n[1] 0 0"
+    "text": "Dimensions of the Data\n\nIf we want to know the number or rows and columns we can use the dim() function\n\n\ndim(penguins) # number or rows and columns in data\n\n[1] 344   9"
   },
   {
     "objectID": "PSY6422_Week2_Lecture1.html#frequency-count-of-a-column",
     "href": "PSY6422_Week2_Lecture1.html#frequency-count-of-a-column",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Frequency Count of a Column",
-    "text": "Frequency Count of a Column\n\nIf we want to know the frequency count of a column in our data we can use the table() function and call a specific column using the format nameofdata$nameofvariable\n\n\ntable(penguins$island) # frequency count for the 'island' column\n\n&lt; table of extent 0 &gt;"
+    "text": "Frequency Count of a Column\n\nIf we want to know the frequency count of a column in our data we can use the table() function and call a specific column using the format nameofdata$nameofvariable\n\n\ntable(penguins$island) # frequency count for the 'island' column\n\n\n   Biscoe     Dream Torgersen \n      168       124        52"
   },
   {
     "objectID": "PSY6422_Week2_Lecture1.html#mean-and-median-of-a-column",
     "href": "PSY6422_Week2_Lecture1.html#mean-and-median-of-a-column",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Mean and Median of a Column",
-    "text": "Mean and Median of a Column\n\nIf we want the mean (or average) for a column/variable we can use the mean() function. If we want the median, we can use the median() function. Again, we will call a specific column using the format nameofdata$nameofvariable\n\n\nmean(penguins$flipper_length_mm, na.rm = TRUE)\n\n[1] NA\n\n\n\n\nmedian(penguins$flipper_length_mm, na.rm = TRUE)\n\nNULL\n\n\n\nNotice the na.rm = TRUE option. We are asking R to evaluate any missing values as NA and calculate the mean and median based on the remaining values.\nNote: If your variable name has spaces in it, you need to put tick marks (`) around the variable name."
+    "text": "Mean and Median of a Column\n\nIf we want the mean (or average) for a column/variable we can use the mean() function. If we want the median, we can use the median() function. Again, we will call a specific column using the format nameofdata$nameofvariable\n\n\nmean(penguins$flipper_length_mm, na.rm = TRUE)\n\n[1] 200.9152\n\n\n\n\nmedian(penguins$flipper_length_mm, na.rm = TRUE)\n\n[1] 197\n\n\n\nNotice the na.rm = TRUE option. We are asking R to evaluate any missing values as NA and calculate the mean and median based on the remaining values.\nNote: If your variable name has spaces in it, you need to put tick marks (`) around the variable name."
   },
   {
     "objectID": "PSY6422_Week2_Lecture1.html#section-5",

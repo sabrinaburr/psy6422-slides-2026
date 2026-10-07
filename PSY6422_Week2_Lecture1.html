@@ -267,11 +267,11 @@ Dr Sabrina Burr
 <p>For your project, don’t stress over which data to choose. The data is merely an excuse for the visualisation. If you have a choice, choose simple over complex. Importantly, <strong>find a dataset with variables you understand</strong>.</p>
 </section>
 <section id="where-can-i-find-data-for-my-project" class="slide level2">
-<h2>Where Can I find Data for My Project?</h2>
+<h2>Where Can I Find Data for My Project?</h2>
 <p><br></p>
 <p><span style="font-size: 1.25em;">There are many places you can look to find data for your mini project</span></p>
 <ul>
-<li><p>Current supervisors</p></li>
+<li><p>Current or past supervisors</p></li>
 <li><p>Single papers with open data</p></li>
 <li><p>Data repositories (e.g., ONS)</p></li>
 </ul>
@@ -393,7 +393,7 @@ Dr Sabrina Burr
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Datasets is the name of the subfolder within my project folder</span></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="co"># penguins.csv is the name of the csv file, stored in the Datasets folder</span></span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="fu">here</span>(<span class="st">"Datasets"</span>, <span class="st">"penguins.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">'../Datasets/penguins.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <div class="cell my-custom-code-size">
@@ -425,7 +425,30 @@ Dr Sabrina Burr
 <div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins) <span class="co"># summary of our data table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt; table of extent 0 x 0 &gt;</code></pre>
+<pre><code>       V1           species             island          bill_length_mm 
+ Min.   :  1.00   Length:344         Length:344         Min.   :32.10  
+ 1st Qu.: 86.75   Class :character   Class :character   1st Qu.:39.23  
+ Median :172.50   Mode  :character   Mode  :character   Median :44.45  
+ Mean   :172.50                                         Mean   :43.92  
+ 3rd Qu.:258.25                                         3rd Qu.:48.50  
+ Max.   :344.00                                         Max.   :59.60  
+                                                        NA's   :2      
+ bill_depth_mm   flipper_length_mm  body_mass_g       sex           
+ Min.   :13.10   Min.   :172.0     Min.   :2700   Length:344        
+ 1st Qu.:15.60   1st Qu.:190.0     1st Qu.:3550   Class :character  
+ Median :17.30   Median :197.0     Median :4050   Mode  :character  
+ Mean   :17.15   Mean   :200.9     Mean   :4202                     
+ 3rd Qu.:18.70   3rd Qu.:213.0     3rd Qu.:4750                     
+ Max.   :21.50   Max.   :231.0     Max.   :6300                     
+ NA's   :2       NA's   :2         NA's   :2                        
+      year     
+ Min.   :2007  
+ 1st Qu.:2007  
+ Median :2008  
+ Mean   :2008  
+ 3rd Qu.:2009  
+ Max.   :2009  
+               </code></pre>
 </div>
 </div>
 </section>
@@ -437,7 +460,9 @@ Dr Sabrina Burr
 <div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(penguins) <span class="co"># names of columns/variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>character(0)</code></pre>
+<pre><code>[1] "V1"                "species"           "island"           
+[4] "bill_length_mm"    "bill_depth_mm"     "flipper_length_mm"
+[7] "body_mass_g"       "sex"               "year"             </code></pre>
 </div>
 </div>
 </section>
@@ -449,7 +474,7 @@ Dr Sabrina Burr
 <div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins) <span class="co"># number or rows and columns in data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0 0</code></pre>
+<pre><code>[1] 344   9</code></pre>
 </div>
 </div>
 </section>
@@ -461,7 +486,9 @@ Dr Sabrina Burr
 <div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(penguins<span class="sc">$</span>island) <span class="co"># frequency count for the 'island' column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt; table of extent 0 &gt;</code></pre>
+<pre><code>
+   Biscoe     Dream Torgersen 
+      168       124        52 </code></pre>
 </div>
 </div>
 </section>
@@ -473,14 +500,14 @@ Dr Sabrina Burr
 <div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(penguins<span class="sc">$</span>flipper_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
+<pre><code>[1] 200.9152</code></pre>
 </div>
 </div>
 <p><br></p>
 <div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(penguins<span class="sc">$</span>flipper_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
+<pre><code>[1] 197</code></pre>
 </div>
 </div>
 <p><br></p>
