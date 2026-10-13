@@ -1243,7 +1243,7 @@
     "href": "PSY6422_Week1_Lecture2.html#vectorised-conditions-on-basic-vectors",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Vectorised Conditions on Basic Vectors",
-    "text": "Vectorised Conditions on Basic Vectors\n\nif statements only check one value at a time. Last week we learned about vectors (lists of values). To check a whole vector at once, we use the vectorised ifelse()\n\n\n\n# a vector of participant ages\nages &lt;- c(22, 15, 19, 12)\n\n# check all values at once\nifelse(ages &gt;= 18, \"Adult\", \"Minor\")\n\n[1] \"Adult\" \"Minor\" \"Adult\" \"Minor\""
+    "text": "Vectorised Conditions on Basic Vectors\n\nif statements only check one value at a time. We previously learned about vectors (lists of values). To check a whole vector at once, we use the vectorised ifelse()\n\n\n\n# a vector of participant ages\nages &lt;- c(22, 15, 19, 12)\n\n# check all values at once\nifelse(ages &gt;= 18, \"Adult\", \"Minor\")\n\n[1] \"Adult\" \"Minor\" \"Adult\" \"Minor\""
   },
   {
     "objectID": "PSY6422_Week1_Lecture2.html#vectorised-conditions-multiple-outcomes",
