@@ -228,7 +228,7 @@
     "href": "PSY6422_Week2_Lecture1.html#dimensions-of-the-data",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Dimensions of the Data",
-    "text": "Dimensions of the Data\n\nIf we want to know the number or rows and columns we can use the dim() function\n\n\ndim(penguins) # number or rows and columns in data\n\n[1] 344   9"
+    "text": "Dimensions of the Data\n\nIf we want to know the number of rows and columns we can use the dim() function\n\n\ndim(penguins) # number or rows and columns in data\n\n[1] 344   9"
   },
   {
     "objectID": "PSY6422_Week2_Lecture1.html#frequency-count-of-a-column",
