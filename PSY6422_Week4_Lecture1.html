@@ -209,7 +209,7 @@
     .reveal .callout-content,
     .reveal ul > li,
     .reveal ol > li {
-      font-size: 1.8em !important;
+      font-size: 1.2em !important;
     }
 
     /* 2. Keep sub-bullets smaller than main bullets (0.85x of the main bullet) */
@@ -219,7 +219,7 @@
 
     /* 3. Scale headers proportionally */
     .reveal h2 {
-      font-size: 1.8em !important;
+      font-size: 1.2em !important;
     }
 
     /* Optional: remove bottom margin from bullet lists */
@@ -435,27 +435,6 @@ Dr Daniel Poole
 <li class="fragment">only one piece of information should be collected per variable</li>
 </ul></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-2"><a></a></span>
-<span id="cb4-3"><a></a><span class="co"># Construct flawed dataset</span></span>
-<span id="cb4-4"><a></a><span class="co"># Create flawed dataset with "blank" cells (as "")</span></span>
-<span id="cb4-5"><a></a>flawed_data <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb4-6"><a></a>  <span class="sc">~</span>ID,    <span class="sc">~</span><span class="st">`</span><span class="at">AGE/YEAR</span><span class="st">`</span>,     <span class="sc">~</span>Condition, <span class="sc">~</span>Q1,  <span class="sc">~</span>Q2,  <span class="sc">~</span>Q3,  <span class="sc">~</span>Q4,  <span class="sc">~</span>Q5,</span>
-<span id="cb4-7"><a></a>  <span class="st">""</span>,     <span class="st">""</span>,              <span class="st">""</span>,         <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span>,</span>
-<span id="cb4-8"><a></a>  <span class="st">"P001"</span>, <span class="st">"23"</span>,            <span class="st">"Control"</span>,  <span class="st">"5"</span>,  <span class="st">"4"</span>,  <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">"3"</span>,</span>
-<span id="cb4-9"><a></a>  <span class="st">""</span>,     <span class="st">""</span>,              <span class="st">""</span>,         <span class="st">""</span>,   <span class="st">"5"</span>,  <span class="st">"3"</span>,  <span class="st">""</span>,   <span class="st">""</span>,</span>
-<span id="cb4-10"><a></a>  <span class="st">"P002"</span>, <span class="st">"1999"</span>,          <span class="st">"Treatment"</span>,<span class="st">""</span>,   <span class="st">"5"</span>,   <span class="st">"2"</span>,   <span class="st">""</span>,   <span class="st">""</span>,</span>
-<span id="cb4-11"><a></a>  <span class="st">""</span>,     <span class="st">""</span>,              <span class="st">""</span>,         <span class="st">"4"</span>,  <span class="st">"4"</span>,  <span class="st">"4"</span>,  <span class="st">""</span>,   <span class="st">"4"</span>,</span>
-<span id="cb4-12"><a></a>  <span class="st">"P003"</span>, <span class="st">"45"</span>,            <span class="st">"Control"</span>,  <span class="st">"5"</span>,  <span class="st">""</span>,   <span class="st">"3"</span>,  <span class="st">""</span>,   <span class="st">""</span>,</span>
-<span id="cb4-13"><a></a>  <span class="st">"P004"</span>, <span class="st">"31"</span>,            <span class="st">"Treatment"</span>,<span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span>,</span>
-<span id="cb4-14"><a></a>  <span class="st">""</span>,     <span class="st">""</span>,              <span class="st">""</span>,         <span class="st">""</span>,   <span class="st">"2"</span>,  <span class="st">"2"</span>,  <span class="st">""</span>,   <span class="st">"2"</span>,</span>
-<span id="cb4-15"><a></a>  <span class="st">"P005"</span>, <span class="st">"30 / 1994"</span>,     <span class="st">"Control"</span>,  <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span>,   <span class="st">""</span></span>
-<span id="cb4-16"><a></a>)</span>
-<span id="cb4-17"><a></a></span>
-<span id="cb4-18"><a></a><span class="co"># Write to CSV — using na = "" so NAs appear as blanks</span></span>
-<span id="cb4-19"><a></a><span class="fu">write_csv</span>(flawed_data, <span class="fu">here</span>(<span class="st">"Datasets"</span>, <span class="st">"flawed_data.csv"</span>), <span class="at">na =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 <section id="can-you-spot-any-issues" class="slide level2">
 <h2>Can you Spot Any Issues?</h2>
@@ -513,13 +492,13 @@ Dr Daniel Poole
 <section id="spot-anything-wrong" class="slide level2">
 <h2>Spot Anything Wrong?</h2>
 <div class="cell" style="font-size: 1.6em;">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co">#Remember to load tidyverse at the beginning of your code</span></span>
-<span id="cb6-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb6-3"><a></a><span class="fu">library</span>(here)</span>
-<span id="cb6-4"><a></a><span class="co"># Read in the data </span></span>
-<span id="cb6-5"><a></a>data_issue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../Datasets/data_type_issues.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb6-6"><a></a><span class="co"># use glimpse to inspect the data</span></span>
-<span id="cb6-7"><a></a><span class="fu">glimpse</span>(data_issue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co">#Remember to load tidyverse at the beginning of your code</span></span>
+<span id="cb5-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-3"><a></a><span class="fu">library</span>(here)</span>
+<span id="cb5-4"><a></a><span class="co"># Read in the data </span></span>
+<span id="cb5-5"><a></a>data_issue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../Datasets/data_type_issues.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-6"><a></a><span class="co"># use glimpse to inspect the data</span></span>
+<span id="cb5-7"><a></a><span class="fu">glimpse</span>(data_issue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 5
 Columns: 9
@@ -597,15 +576,15 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <section id="data-frames-1" class="slide level2">
 <h2>Data Frames</h2>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Base R data frame</span></span>
-<span id="cb8-2"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb8-3"><a></a>  <span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),</span>
-<span id="cb8-4"><a></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>),</span>
-<span id="cb8-5"><a></a>  <span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>),</span>
-<span id="cb8-6"><a></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">92</span>, <span class="dv">79</span>)</span>
-<span id="cb8-7"><a></a>)</span>
-<span id="cb8-8"><a></a><span class="co">#prints data frame</span></span>
-<span id="cb8-9"><a></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Base R data frame</span></span>
+<span id="cb7-2"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-3"><a></a>  <span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),</span>
+<span id="cb7-4"><a></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>),</span>
+<span id="cb7-5"><a></a>  <span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>),</span>
+<span id="cb7-6"><a></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">92</span>, <span class="dv">79</span>)</span>
+<span id="cb7-7"><a></a>)</span>
+<span id="cb7-8"><a></a><span class="co">#prints data frame</span></span>
+<span id="cb7-9"><a></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    ID Age Condition Score
 1 P001  23   Control    88
@@ -627,17 +606,17 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <section id="tibbles-1" class="slide level2">
 <h2>Tibbles</h2>
 <div class="cell" style="font-size: 1.6em;">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co">#loads tidyverse</span></span>
-<span id="cb10-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb10-3"><a></a><span class="co">#tidyverse tibble</span></span>
-<span id="cb10-4"><a></a>tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb10-5"><a></a>  <span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),</span>
-<span id="cb10-6"><a></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>),</span>
-<span id="cb10-7"><a></a>  <span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>),</span>
-<span id="cb10-8"><a></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">92</span>, <span class="dv">79</span>)</span>
-<span id="cb10-9"><a></a>)</span>
-<span id="cb10-10"><a></a><span class="co">#prints tibble</span></span>
-<span id="cb10-11"><a></a><span class="fu">print</span>(tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co">#loads tidyverse</span></span>
+<span id="cb9-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-3"><a></a><span class="co">#tidyverse tibble</span></span>
+<span id="cb9-4"><a></a>tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-5"><a></a>  <span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),</span>
+<span id="cb9-6"><a></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>),</span>
+<span id="cb9-7"><a></a>  <span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>),</span>
+<span id="cb9-8"><a></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">92</span>, <span class="dv">79</span>)</span>
+<span id="cb9-9"><a></a>)</span>
+<span id="cb9-10"><a></a><span class="co">#prints tibble</span></span>
+<span id="cb9-11"><a></a><span class="fu">print</span>(tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   ID      Age Condition Score
@@ -654,16 +633,16 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <h2>Tibbles</h2>
 <p>You can use the <code>tribble()</code> function to create a tibble row by row</p>
 <div class="cell" style="font-size: 1.6em;">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span> (tidyverse)</span>
-<span id="cb12-2"><a></a><span class="co">#create a tibble row by row if you want to</span></span>
-<span id="cb12-3"><a></a>tb <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb12-4"><a></a>  <span class="sc">~</span>ID,    <span class="sc">~</span>Age, <span class="sc">~</span>Condition,  <span class="sc">~</span>Score,</span>
-<span id="cb12-5"><a></a>  <span class="st">"P001"</span>,  <span class="dv">23</span>,  <span class="st">"Control"</span>,    <span class="dv">88</span>,</span>
-<span id="cb12-6"><a></a>  <span class="st">"P002"</span>,  <span class="dv">31</span>,  <span class="st">"Treatment"</span>,  <span class="dv">92</span>,</span>
-<span id="cb12-7"><a></a>  <span class="st">"P003"</span>,  <span class="dv">45</span>,  <span class="st">"Control"</span>,    <span class="dv">79</span></span>
-<span id="cb12-8"><a></a>)</span>
-<span id="cb12-9"><a></a><span class="co">#prints tibble</span></span>
-<span id="cb12-10"><a></a><span class="fu">print</span>(tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span> (tidyverse)</span>
+<span id="cb11-2"><a></a><span class="co">#create a tibble row by row if you want to</span></span>
+<span id="cb11-3"><a></a>tb <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb11-4"><a></a>  <span class="sc">~</span>ID,    <span class="sc">~</span>Age, <span class="sc">~</span>Condition,  <span class="sc">~</span>Score,</span>
+<span id="cb11-5"><a></a>  <span class="st">"P001"</span>,  <span class="dv">23</span>,  <span class="st">"Control"</span>,    <span class="dv">88</span>,</span>
+<span id="cb11-6"><a></a>  <span class="st">"P002"</span>,  <span class="dv">31</span>,  <span class="st">"Treatment"</span>,  <span class="dv">92</span>,</span>
+<span id="cb11-7"><a></a>  <span class="st">"P003"</span>,  <span class="dv">45</span>,  <span class="st">"Control"</span>,    <span class="dv">79</span></span>
+<span id="cb11-8"><a></a>)</span>
+<span id="cb11-9"><a></a><span class="co">#prints tibble</span></span>
+<span id="cb11-10"><a></a><span class="fu">print</span>(tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   ID      Age Condition Score
@@ -691,17 +670,17 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <h2>Tibbles</h2>
 <p>You can convert an existing data frame to a tibble</p>
 <div class="cell" style="font-size: 1.6em;">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb14-2"><a></a><span class="co">#prints df</span></span>
-<span id="cb14-3"><a></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-2"><a></a><span class="co">#prints df</span></span>
+<span id="cb13-3"><a></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    ID Age Condition Score
 1 P001  23   Control    88
 2 P002  31 Treatment    92
 3 P003  45   Control    79</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co">#convert the data frame we made earlier into a tibble (note also prints)</span></span>
-<span id="cb16-2"><a></a><span class="fu">as_tibble</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co">#convert the data frame we made earlier into a tibble (note also prints)</span></span>
+<span id="cb15-2"><a></a><span class="fu">as_tibble</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   ID      Age Condition Score
@@ -716,12 +695,12 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <h2>Tibbles</h2>
 <p>We subset tibbles exactly the same as dataframes</p>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co">#loads tidyverse</span></span>
-<span id="cb18-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb18-3"><a></a><span class="co">#tidyverse tibble</span></span>
-<span id="cb18-4"><a></a>tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>),<span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>),<span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">92</span>, <span class="dv">79</span>))</span>
-<span id="cb18-5"><a></a><span class="co">#Subsets ID's</span></span>
-<span id="cb18-6"><a></a>tb<span class="sc">$</span>ID</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co">#loads tidyverse</span></span>
+<span id="cb17-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-3"><a></a><span class="co">#tidyverse tibble</span></span>
+<span id="cb17-4"><a></a>tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>),<span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>),<span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">92</span>, <span class="dv">79</span>))</span>
+<span id="cb17-5"><a></a><span class="co">#Subsets ID's</span></span>
+<span id="cb17-6"><a></a>tb<span class="sc">$</span>ID</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "P001" "P002" "P003"</code></pre>
 </div>
@@ -763,7 +742,7 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <section id="rbind-errors-to-watch-for-1" class="slide level2">
 <h2><code>rbind()</code> Errors to Watch For</h2>
 <div class="cell" style="font-size: 1.6em;">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">head</span>(tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">head</span>(tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   ID      Age Condition Score
@@ -771,10 +750,10 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 1 P001     23 Control      88
 2 P002     31 Treatment    92</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Second tibble with missing columns</span></span>
-<span id="cb22-2"><a></a>tb2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="st">"P003"</span>,<span class="at">Age =</span> <span class="dv">45</span>,<span class="at">Condition =</span> <span class="st">"Control"</span>)</span>
-<span id="cb22-3"><a></a><span class="co"># Bind rows (try() is so my slides can compile)</span></span>
-<span id="cb22-4"><a></a><span class="fu">try</span>(<span class="fu">rbind</span>(tb, tb2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Second tibble with missing columns</span></span>
+<span id="cb21-2"><a></a>tb2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="st">"P003"</span>,<span class="at">Age =</span> <span class="dv">45</span>,<span class="at">Condition =</span> <span class="st">"Control"</span>)</span>
+<span id="cb21-3"><a></a><span class="co"># Bind rows (try() is so my slides can compile)</span></span>
+<span id="cb21-4"><a></a><span class="fu">try</span>(<span class="fu">rbind</span>(tb, tb2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error in rbind(deparse.level, ...) : 
   numbers of columns of arguments do not match</code></pre>
@@ -784,11 +763,11 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <section id="rbind-errors-to-watch-for-2" class="slide level2">
 <h2><code>rbind()</code> Errors to Watch For</h2>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb24-2"><a></a><span class="co"># Creates a tibble where Condition is cond</span></span>
-<span id="cb24-3"><a></a>bad_row <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="st">"P004"</span>,<span class="at">Age =</span> <span class="dv">32</span>,<span class="at">cond =</span> <span class="st">"Control"</span>,<span class="at">Score =</span> <span class="dv">88</span>)</span>
-<span id="cb24-4"><a></a><span class="co"># Combine with existing tibble </span></span>
-<span id="cb24-5"><a></a><span class="fu">try</span>(<span class="fu">rbind</span>(tb, bad_row))   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb23-2"><a></a><span class="co"># Creates a tibble where Condition is cond</span></span>
+<span id="cb23-3"><a></a>bad_row <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="st">"P004"</span>,<span class="at">Age =</span> <span class="dv">32</span>,<span class="at">cond =</span> <span class="st">"Control"</span>,<span class="at">Score =</span> <span class="dv">88</span>)</span>
+<span id="cb23-4"><a></a><span class="co"># Combine with existing tibble </span></span>
+<span id="cb23-5"><a></a><span class="fu">try</span>(<span class="fu">rbind</span>(tb, bad_row))   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error in match.names(clabs, names(xi)) : 
   names do not match previous names</code></pre>
@@ -816,16 +795,16 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <section id="joining-columns-1" class="slide level2">
 <h2>Joining Columns</h2>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb26-2"><a></a><span class="do">## Joining Columns </span></span>
-<span id="cb26-3"><a></a><span class="co"># Demographics</span></span>
-<span id="cb26-4"><a></a>demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>))</span>
-<span id="cb26-5"><a></a><span class="co"># Questionnaire scores </span></span>
-<span id="cb26-6"><a></a>scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Q1 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>),<span class="at">Q2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</span>
-<span id="cb26-7"><a></a><span class="co"># Combine side-by-side</span></span>
-<span id="cb26-8"><a></a>combined <span class="ot">&lt;-</span> <span class="fu">cbind</span>(demo, scores)</span>
-<span id="cb26-9"><a></a><span class="co">#cbind doesn't auto print</span></span>
-<span id="cb26-10"><a></a><span class="fu">print</span>(combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-2"><a></a><span class="do">## Joining Columns </span></span>
+<span id="cb25-3"><a></a><span class="co"># Demographics</span></span>
+<span id="cb25-4"><a></a>demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>))</span>
+<span id="cb25-5"><a></a><span class="co"># Questionnaire scores </span></span>
+<span id="cb25-6"><a></a>scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Q1 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>),<span class="at">Q2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</span>
+<span id="cb25-7"><a></a><span class="co"># Combine side-by-side</span></span>
+<span id="cb25-8"><a></a>combined <span class="ot">&lt;-</span> <span class="fu">cbind</span>(demo, scores)</span>
+<span id="cb25-9"><a></a><span class="co">#cbind doesn't auto print</span></span>
+<span id="cb25-10"><a></a><span class="fu">print</span>(combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    ID Age   ID Q1 Q2
 1 P001  23 P001  4  3
@@ -844,14 +823,14 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <section id="cbind-errors-to-watch-for-1" class="slide level2">
 <h2><code>cbind()</code> Errors to Watch For</h2>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb28-2"><a></a><span class="co"># Demographics (same as before)</span></span>
-<span id="cb28-3"><a></a>demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>))</span>
-<span id="cb28-4"><a></a><span class="co"># Scores with different row order!</span></span>
-<span id="cb28-5"><a></a>scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P002"</span>, <span class="st">"P003"</span>, <span class="st">"P001"</span>),<span class="at">Q1 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>),<span class="at">Q2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb28-6"><a></a><span class="co"># Combine side-by-side</span></span>
-<span id="cb28-7"><a></a>combined_wrong <span class="ot">&lt;-</span> <span class="fu">cbind</span>(demo, scores)</span>
-<span id="cb28-8"><a></a><span class="fu">print</span>(combined_wrong)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb27-2"><a></a><span class="co"># Demographics (same as before)</span></span>
+<span id="cb27-3"><a></a>demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>))</span>
+<span id="cb27-4"><a></a><span class="co"># Scores with different row order!</span></span>
+<span id="cb27-5"><a></a>scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P002"</span>, <span class="st">"P003"</span>, <span class="st">"P001"</span>),<span class="at">Q1 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>),<span class="at">Q2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb27-6"><a></a><span class="co"># Combine side-by-side</span></span>
+<span id="cb27-7"><a></a>combined_wrong <span class="ot">&lt;-</span> <span class="fu">cbind</span>(demo, scores)</span>
+<span id="cb27-8"><a></a><span class="fu">print</span>(combined_wrong)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    ID Age   ID Q1 Q2
 1 P001  23 P002  5  4
@@ -871,15 +850,15 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <section id="safer-merging-of-columns-1" class="slide level2">
 <h2>Safer Merging of Columns</h2>
 <div class="cell" style="font-size: 1.6em;">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="co"># Load tidyverse</span></span>
-<span id="cb30-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb30-3"><a></a><span class="co"># Demographics</span></span>
-<span id="cb30-4"><a></a>demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>))</span>
-<span id="cb30-5"><a></a><span class="co"># Scores (different row order!)</span></span>
-<span id="cb30-6"><a></a>scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P002"</span>, <span class="st">"P003"</span>, <span class="st">"P001"</span>),<span class="at">Q1 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>),<span class="at">Q2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb30-7"><a></a><span class="co"># Merge safely by ID</span></span>
-<span id="cb30-8"><a></a>joined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(demo, scores, <span class="at">by =</span> <span class="st">"ID"</span>)</span>
-<span id="cb30-9"><a></a><span class="fu">print</span>(joined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># Load tidyverse</span></span>
+<span id="cb29-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb29-3"><a></a><span class="co"># Demographics</span></span>
+<span id="cb29-4"><a></a>demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>),<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">45</span>))</span>
+<span id="cb29-5"><a></a><span class="co"># Scores (different row order!)</span></span>
+<span id="cb29-6"><a></a>scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P002"</span>, <span class="st">"P003"</span>, <span class="st">"P001"</span>),<span class="at">Q1 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>),<span class="at">Q2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb29-7"><a></a><span class="co"># Merge safely by ID</span></span>
+<span id="cb29-8"><a></a>joined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(demo, scores, <span class="at">by =</span> <span class="st">"ID"</span>)</span>
+<span id="cb29-9"><a></a><span class="fu">print</span>(joined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   ID      Age    Q1    Q2
@@ -901,11 +880,11 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <h2>Identifying Duplicates</h2>
 <p><br></p>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb32-2"><a></a><span class="co"># Creates tibble</span></span>
-<span id="cb32-3"><a></a>data_dupes <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P001"</span>, <span class="st">"P003"</span>, <span class="st">"P002"</span>), <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">23</span>, <span class="dv">45</span>, <span class="dv">31</span>),<span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>, <span class="st">"Control"</span>, <span class="st">"Treatment"</span>),  <span class="at">Q1 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>),<span class="at">Q2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">4</span>))</span>
-<span id="cb32-4"><a></a><span class="co">#Identifies duplicates (as a logical vector)</span></span>
-<span id="cb32-5"><a></a><span class="fu">duplicated</span>(data_dupes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb31-2"><a></a><span class="co"># Creates tibble</span></span>
+<span id="cb31-3"><a></a>data_dupes <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P001"</span>, <span class="st">"P003"</span>, <span class="st">"P002"</span>), <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">31</span>, <span class="dv">23</span>, <span class="dv">45</span>, <span class="dv">31</span>),<span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>, <span class="st">"Control"</span>, <span class="st">"Treatment"</span>),  <span class="at">Q1 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>),<span class="at">Q2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb31-4"><a></a><span class="co">#Identifies duplicates (as a logical vector)</span></span>
+<span id="cb31-5"><a></a><span class="fu">duplicated</span>(data_dupes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE FALSE  TRUE FALSE  TRUE</code></pre>
 </div>
@@ -917,10 +896,10 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <p>If you have identified that there are duplicates you may want to remove them <br> <code>distinct()</code> will leave you with the first occurrence of each row</p>
 <p><br></p>
 <div class="cell" style="font-size: 1.6em;">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb34-2"><a></a><span class="co"># Remove exact duplicates</span></span>
-<span id="cb34-3"><a></a>data_clean <span class="ot">&lt;-</span> <span class="fu">distinct</span>(data_dupes)</span>
-<span id="cb34-4"><a></a><span class="fu">print</span>(data_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-2"><a></a><span class="co"># Remove exact duplicates</span></span>
+<span id="cb33-3"><a></a>data_clean <span class="ot">&lt;-</span> <span class="fu">distinct</span>(data_dupes)</span>
+<span id="cb33-4"><a></a><span class="fu">print</span>(data_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   ID      Age Condition    Q1    Q2
@@ -945,12 +924,12 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <h2>Missing Data</h2>
 <p><br></p>
 <div class="cell" style="font-size: 1.4em;">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">library</span>(here)</span>
-<span id="cb36-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb36-3"><a></a><span class="co">#loads the flawed dataset from earlier</span></span>
-<span id="cb36-4"><a></a>flawed<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"../Datasets/flawed_data.csv"</span>)</span>
-<span id="cb36-5"><a></a><span class="co"># show dataset</span></span>
-<span id="cb36-6"><a></a><span class="fu">head</span>(flawed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">library</span>(here)</span>
+<span id="cb35-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb35-3"><a></a><span class="co">#loads the flawed dataset from earlier</span></span>
+<span id="cb35-4"><a></a>flawed<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"../Datasets/flawed_data.csv"</span>)</span>
+<span id="cb35-5"><a></a><span class="co"># show dataset</span></span>
+<span id="cb35-6"><a></a><span class="fu">head</span>(flawed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
   ID    `AGE/YEAR` Condition    Q1    Q2    Q3 Q4       Q5
@@ -962,8 +941,8 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 5 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;          4     4     4 NA        4
 6 P003  45         Control       5    NA     3 NA       NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="do">## Counts is.na values per column</span></span>
-<span id="cb38-2"><a></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(flawed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="do">## Counts is.na values per column</span></span>
+<span id="cb37-2"><a></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(flawed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       ID  AGE/YEAR Condition        Q1        Q2        Q3        Q4        Q5 
         4         4         4         6         4         4         9         6 </code></pre>
@@ -974,15 +953,15 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <h2>We Can Also Visualise</h2>
 <p><br></p>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">library</span>(here)</span>
-<span id="cb40-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb40-3"><a></a><span class="co">#loads the flawed dataset from earlier</span></span>
-<span id="cb40-4"><a></a>flawed<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"Datasets"</span>, <span class="st">"flawed_data.csv"</span>))</span>
-<span id="cb40-5"><a></a><span class="co"># We can also visualise missing data </span></span>
-<span id="cb40-6"><a></a><span class="co">#loads naniar package - remember to install first time!</span></span>
-<span id="cb40-7"><a></a><span class="fu">library</span>(naniar)</span>
-<span id="cb40-8"><a></a><span class="co">#plots missing values</span></span>
-<span id="cb40-9"><a></a><span class="fu">vis_miss</span>(flawed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">library</span>(here)</span>
+<span id="cb39-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb39-3"><a></a><span class="co">#loads the flawed dataset from earlier</span></span>
+<span id="cb39-4"><a></a>flawed<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"Datasets"</span>, <span class="st">"flawed_data.csv"</span>))</span>
+<span id="cb39-5"><a></a><span class="co"># We can also visualise missing data </span></span>
+<span id="cb39-6"><a></a><span class="co">#loads naniar package - remember to install first time!</span></span>
+<span id="cb39-7"><a></a><span class="fu">library</span>(naniar)</span>
+<span id="cb39-8"><a></a><span class="co">#plots missing values</span></span>
+<span id="cb39-9"><a></a><span class="fu">vis_miss</span>(flawed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="we-can-also-visualise-1" class="slide level2">
@@ -1068,7 +1047,7 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <h2>Wide Data Example</h2>
 <p>Imagine a survey with three questions (Q1-Q3) asked at two time points (T1 and T2).</p>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">print</span>(wide_data_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">print</span>(wide_data_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 8
   ID    Condition Q1_T1 Q2_T1 Q3_T1 Q1_T2 Q2_T2 Q3_T2
@@ -1083,7 +1062,7 @@ $ Q5        &lt;chr&gt; "5", "N/A", "3", "4", "3"</code></pre>
 <h2>Long Data Example: Keep it Tidy!</h2>
 <p><strong>Long Format</strong> better adheres to Tidy Data principles:</p>
 <div class="cell" style="font-size: 1.8em;">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">print</span>(long_data_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">print</span>(long_data_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 6
   ID    Condition Timepoint    Q1    Q2    Q3
