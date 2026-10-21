@@ -2643,7 +2643,7 @@
     "href": "PSY6422_Week4_Lecture1.html#exploring-the-tidyverse-1",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Exploring the Tidyverse!",
-    "text": "Exploring the Tidyverse!\n\n\n#install tidyverse package\ninstall.packages(\"tidyverse\")\n#loads the tidyverse package\nlibrary(tidyverse)"
+    "text": "Exploring the Tidyverse!\n\n\n\n\nA two-panel meme titled “WOW the universe is truly fascinating!” The top panel shows two people pointing at the moon and stars with the caption ” what they mean”, implying a fascination with astronomy. The bottom panel, captioned “what I mean”, shows the same scene but overlaid with images representing the Tidyverse. There’s also a cutout image of Hadley Wickham"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#exploring-the-tidyverse-2",
@@ -2664,14 +2664,14 @@
     "href": "PSY6422_Week4_Lecture1.html#importing-data-into-r-1",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Importing Data into R",
-    "text": "Importing Data into R\n In Week 2 you learned how to import data using the data.table package - We are now using ‘tidyverse’ which includes readr\n\n#Remember to load tidyverse at the beginning of your code\nlibrary(tidyverse)\nread_csv(here(\"Datasets\", \"my_data.csv\")) #change to your actual data file"
+    "text": "Importing Data into R\n In Week 2 you learned how to import data using the data.table package - We are now using ‘tidyverse’ which includes readr\n\n\n#Remember to load tidyverse at the beginning of your code\nlibrary(tidyverse)\nread_csv(\"Data/my_data.csv\") #change to your actual data file\n\n Note we are using relative paths within our R project"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#importing-data-into-r-2",
     "href": "PSY6422_Week4_Lecture1.html#importing-data-into-r-2",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Importing Data into R",
-    "text": "Importing Data into R\n Note we are using relative paths within our R project\n\n#Remember to load tidyverse at the beginning of your code\nlibrary(tidyverse)\nread_csv(here(\"Datasets\", \"my_data.csv\")) #change to your actual data file"
+    "text": "Importing Data into R\n We can make our paths even more reliable  by combining readr with here() from the here package\n\n#Remember to load tidyverse at the beginning of your code\nlibrary(here)\nlibrary(tidyverse)\nread_csv(here(\"Datasets\", \"my_data.csv\"))\n\n You can use here() to check where R thinks the data is\n\nhere() is reliable as it always starts from the project root, wherever it may be saved!"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#importing-data-into-r-3",
@@ -2720,7 +2720,7 @@
     "href": "PSY6422_Week4_Lecture1.html#spot-anything-wrong",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Spot Anything Wrong?",
-    "text": "Spot Anything Wrong?\n\nlibrary(tidyverse)\n\ndir.create(\"Data\", showWarnings = FALSE)\n\ndata_type_issues &lt;- tribble(\n  ~ID,    ~AGE,       ~Condition, ~Timepoint, ~Q1,   ~Q2,   ~Q3,   ~Q4,   ~Q5,\n  \"P001\", \"23\",       \"Control\",  \"T1\",       \"5\",   \"4\",   \"3\",   \"4\",   \"5\",\n  \"P002\", \"30\",       \"Treatment\",\"T1\",       \"4\",   \"4\",   \"4\",   \"3\",   \"N/A\",\n  \"P003\", \"27\",       \"Control\",  \"T2\",       \"3\",   \"4\",   \"3\",   \"4\",   \"3\",\n  \"P004\", \"unknown\",  \"Treatment\",\"T1\",       \"4\",   \"4\",   \"4\",   \"4\",   \"4\",\n  \"P005\", \"25\",       \"Control\",  \"T2\",       \"3\",   \"3\",   \"3\",   \"3\",   \"3\"\n)\n\nwrite_csv(data_type_issues, here(\"Datasets\", \"data_type_issues.csv\"), na = \"\")\n\n\n#Remember to load tidyverse at the beginning of your code\nlibrary(tidyverse)\nlibrary(here)\n# Read in the data \ndata_issue &lt;- read_csv(\"../Datasets/data_type_issues.csv\", show_col_types = FALSE)\n# use glimpse to inspect the data\nglimpse(data_issue)\n\nRows: 5\nColumns: 9\n$ ID        &lt;chr&gt; \"P001\", \"P002\", \"P003\", \"P004\", \"P005\"\n$ AGE       &lt;chr&gt; \"23\", \"30\", \"27\", \"unknown\", \"25\"\n$ Condition &lt;chr&gt; \"Control\", \"Treatment\", \"Control\", \"Treatment\", \"Control\"\n$ Timepoint &lt;chr&gt; \"T1\", \"T1\", \"T2\", \"T1\", \"T2\"\n$ Q1        &lt;dbl&gt; 5, 4, 3, 4, 3\n$ Q2        &lt;dbl&gt; 4, 4, 4, 4, 3\n$ Q3        &lt;dbl&gt; 3, 4, 3, 4, 3\n$ Q4        &lt;dbl&gt; 4, 3, 4, 4, 3\n$ Q5        &lt;chr&gt; \"5\", \"N/A\", \"3\", \"4\", \"3\"\n\n\n\nIn age an unknown value is turning this into character Q 5 has an N/A which coerced into character. - Does anything seem wrong? - Why might this be happening? What problems would this cause??"
+    "text": "Spot Anything Wrong?\n\n#Remember to load tidyverse at the beginning of your code\nlibrary(tidyverse)\nlibrary(here)\n# Read in the data \ndata_issue &lt;- read_csv(\"../Datasets/data_type_issues.csv\", show_col_types = FALSE)\n# use glimpse to inspect the data\nglimpse(data_issue)\n\nRows: 5\nColumns: 9\n$ ID        &lt;chr&gt; \"P001\", \"P002\", \"P003\", \"P004\", \"P005\"\n$ AGE       &lt;chr&gt; \"23\", \"30\", \"27\", \"unknown\", \"25\"\n$ Condition &lt;chr&gt; \"Control\", \"Treatment\", \"Control\", \"Treatment\", \"Control\"\n$ Timepoint &lt;chr&gt; \"T1\", \"T1\", \"T2\", \"T1\", \"T2\"\n$ Q1        &lt;dbl&gt; 5, 4, 3, 4, 3\n$ Q2        &lt;dbl&gt; 4, 4, 4, 4, 3\n$ Q3        &lt;dbl&gt; 3, 4, 3, 4, 3\n$ Q4        &lt;dbl&gt; 4, 3, 4, 4, 3\n$ Q5        &lt;chr&gt; \"5\", \"N/A\", \"3\", \"4\", \"3\"\n\n\n\nIn age an unknown value is turning this into character Q 5 has an N/A which coerced into character. - Does anything seem wrong? - Why might this be happening? What problems would this cause??"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#live-coding",
@@ -2748,7 +2748,7 @@
     "href": "PSY6422_Week4_Lecture1.html#data-frames",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Data Frames",
-    "text": "Data Frames\nYou were introduced to dataframes in week 1  A data frame is the basic way R stores tabular data — like a spreadsheet.\n\nRows = observations (e.g. participants, trials)\nColumns = variables (e.g. age, condition, score)\n\nIt looks like a table, but behaves like an object R can work with"
+    "text": "Data Frames\nYou were introduced to dataframes in Week 1  A data frame is the basic way R stores tabular data — like a spreadsheet.\n\nRows = observations (e.g. participants, trials)\nColumns = variables (e.g. age, condition, score)\n\nIt looks like a table, but behaves like an object R can work with"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#data-frames-1",
@@ -2888,14 +2888,14 @@
     "href": "PSY6422_Week4_Lecture1.html#identifying-duplicates-1",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Identifying Duplicates",
-    "text": "Identifying Duplicates\n\nlibrary(tidyverse)\n# Creates tibble\ndata_dupes &lt;- tibble( ID = c(\"P001\", \"P002\", \"P001\", \"P003\", \"P002\"), Age = c(23, 31, 23, 45, 31),Condition = c(\"Control\", \"Treatment\", \"Control\", \"Control\", \"Treatment\"),  Q1 = c(4, 5, 4, 3, 5),Q2 = c(3, 4, 3, 5, 4))\n#Identifies duplicates (as a logical vector)\nduplicated(data_dupes)\n\n[1] FALSE FALSE  TRUE FALSE  TRUE"
+    "text": "Identifying Duplicates\n\n\nlibrary(tidyverse)\n# Creates tibble\ndata_dupes &lt;- tibble( ID = c(\"P001\", \"P002\", \"P001\", \"P003\", \"P002\"), Age = c(23, 31, 23, 45, 31),Condition = c(\"Control\", \"Treatment\", \"Control\", \"Control\", \"Treatment\"),  Q1 = c(4, 5, 4, 3, 5),Q2 = c(3, 4, 3, 5, 4))\n#Identifies duplicates (as a logical vector)\nduplicated(data_dupes)\n\n[1] FALSE FALSE  TRUE FALSE  TRUE"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#removing-duplicates",
     "href": "PSY6422_Week4_Lecture1.html#removing-duplicates",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Removing Duplicates",
-    "text": "Removing Duplicates\nIf you have identified that there are duplicates you may want to remove them  distinct() will leave you with the first occurrence of each row\n\nlibrary(tidyverse)\n# Remove exact duplicates\ndata_clean &lt;- distinct(data_dupes)\nprint(data_clean)\n\n# A tibble: 3 × 5\n  ID      Age Condition    Q1    Q2\n  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 P001     23 Control       4     3\n2 P002     31 Treatment     5     4\n3 P003     45 Control       3     5"
+    "text": "Removing Duplicates\nIf you have identified that there are duplicates you may want to remove them  distinct() will leave you with the first occurrence of each row\n\n\nlibrary(tidyverse)\n# Remove exact duplicates\ndata_clean &lt;- distinct(data_dupes)\nprint(data_clean)\n\n# A tibble: 3 × 5\n  ID      Age Condition    Q1    Q2\n  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 P001     23 Control       4     3\n2 P002     31 Treatment     5     4\n3 P003     45 Control       3     5"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#missing-data",
@@ -2916,14 +2916,14 @@
     "href": "PSY6422_Week4_Lecture1.html#missing-data-2",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Missing Data",
-    "text": "Missing Data\n\nlibrary(here)\nlibrary(tidyverse)\n#loads the flawed dataset from earlier\nflawed&lt;-read_csv(\"../Datasets/data_type_issues.csv\")\n# show dataset\nhead(flawed)\n\n# A tibble: 5 × 9\n  ID    AGE     Condition Timepoint    Q1    Q2    Q3    Q4 Q5   \n  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;\n1 P001  23      Control   T1            5     4     3     4 5    \n2 P002  30      Treatment T1            4     4     4     3 N/A  \n3 P003  27      Control   T2            3     4     3     4 3    \n4 P004  unknown Treatment T1            4     4     4     4 4    \n5 P005  25      Control   T2            3     3     3     3 3    \n\n## Counts is.na values per column\ncolSums(is.na(flawed))\n\n       ID       AGE Condition Timepoint        Q1        Q2        Q3        Q4 \n        0         0         0         0         0         0         0         0 \n       Q5 \n        0"
+    "text": "Missing Data\n\n\nlibrary(here)\nlibrary(tidyverse)\n#loads the flawed dataset from earlier\nflawed&lt;-read_csv(\"../Datasets/flawed_data.csv\")\n# show dataset\nhead(flawed)\n\n# A tibble: 6 × 8\n  ID    `AGE/YEAR` Condition    Q1    Q2    Q3 Q4       Q5\n  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt; &lt;dbl&gt;\n1 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;         NA    NA    NA NA       NA\n2 P001  23         Control       5     4    NA NA        3\n3 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;         NA     5     3 NA       NA\n4 P002  1999       Treatment    NA     5     2 NA       NA\n5 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;          4     4     4 NA        4\n6 P003  45         Control       5    NA     3 NA       NA\n\n## Counts is.na values per column\ncolSums(is.na(flawed))\n\n       ID  AGE/YEAR Condition        Q1        Q2        Q3        Q4        Q5 \n        4         4         4         6         4         4         9         6"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#we-can-also-visualise",
     "href": "PSY6422_Week4_Lecture1.html#we-can-also-visualise",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "We Can Also Visualise",
-    "text": "We Can Also Visualise\n\nlibrary(here)\nlibrary(tidyverse)\n#loads the flawed dataset from earlier\nflawed&lt;-read_csv(here(\"Datasets\", \"flawed_data.csv\"))\n# We can also visualise missing data \n#loads naniar package - remember to install first time!\nlibrary(naniar)\n#plots missing values\nvis_miss(flawed)"
+    "text": "We Can Also Visualise\n\n\nlibrary(here)\nlibrary(tidyverse)\n#loads the flawed dataset from earlier\nflawed&lt;-read_csv(here(\"Datasets\", \"flawed_data.csv\"))\n# We can also visualise missing data \n#loads naniar package - remember to install first time!\nlibrary(naniar)\n#plots missing values\nvis_miss(flawed)"
   },
   {
     "objectID": "PSY6422_Week4_Lecture1.html#we-can-also-visualise-1",
@@ -4121,5 +4121,12 @@
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "A Better Way: Time-Series Trends",
     "text": "A Better Way: Time-Series Trends"
+  },
+  {
+    "objectID": "PSY6422_Week4_Lecture1.html#enter-the-tidyverse",
+    "href": "PSY6422_Week4_Lecture1.html#enter-the-tidyverse",
+    "title": "PSY6422 - Data Management & Visualisation",
+    "section": "Enter the Tidyverse!",
+    "text": "Enter the Tidyverse!\n\n\n#install tidyverse package\ninstall.packages(\"tidyverse\")\n#loads the tidyverse package\nlibrary(tidyverse)"
   }
 ]
