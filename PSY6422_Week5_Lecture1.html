@@ -189,7 +189,40 @@
     }
   </style>
   <style>
-    /* Optional: remove bottom margin from bullet lists if not handled in SCSS */
+  /* Override global font size for slides marked with .small-text */
+    .reveal section.small-text p,
+    .reveal section.small-text li {
+      font-size: 1.2em !important; /* Tweak down (e.g., 1.1em, 1.0em) until it fits */
+    }
+
+    /* ... keep your other existing styles here ... */
+  /* Target code blocks with class: big-code */
+    .reveal pre.big-code,
+    .reveal pre.big-code code {
+      font-size: 1.4em !important; /* Increase from default (e.g., 1.3em, 1.5em, 1.6em) */
+      line-height: 1.3 !important;
+    }
+
+    /* ... keep your other existing styles here ... */
+    /* 1. Make paragraphs, callouts, and main bullets 30% larger */
+    .reveal p,
+    .reveal .callout-content,
+    .reveal ul > li,
+    .reveal ol > li {
+      font-size: 1.2em !important;
+    }
+
+    /* 2. Keep sub-bullets smaller than main bullets (0.85x of the main bullet) */
+    .reveal li li {
+      font-size: 0.85em !important;
+    }
+
+    /* 3. Scale headers proportionally */
+    .reveal h2 {
+      font-size: 1.2em !important;
+    }
+
+    /* Optional: remove bottom margin from bullet lists */
     .reveal ul {
       margin-bottom: 0 !important;
     }
@@ -305,13 +338,13 @@ Dr Daniel Poole
 <section id="the-pipe-in-action" class="slide level2">
 <h2>The Pipe in Action</h2>
 <p>Without the pipe, we typically have to nest functions</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># From a dataset, select participants aged over 25 </span></span>
 <span id="cb1-2"><a></a><span class="co"># and show the first few rows</span></span>
 <span id="cb1-3"><a></a><span class="fu">head</span>(<span class="fu">filter</span>(my_data, age <span class="sc">&gt;</span> <span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br> The pipe makes the code much more intuitive and readable</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># From a dataset, select participants aged over 25 </span></span>
 <span id="cb2-2"><a></a><span class="co"># and show the first few rows</span></span>
 <span id="cb2-3"><a></a>data <span class="sc">%&gt;%</span> </span>
@@ -322,7 +355,7 @@ Dr Daniel Poole
 <section id="the-pipe-in-action-1" class="slide level2">
 <h2>The Pipe in Action</h2>
 <p>The value of the pipe becomes clear when we start adding steps to the transformations we execute on our dataset</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># A simple pipeline</span></span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span> </span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Condition <span class="sc">==</span> <span class="st">"Treatment"</span>) <span class="sc">%&gt;%</span> <span class="co"># Step 1: Keep only 'Treatment' group</span></span>
@@ -336,7 +369,7 @@ Dr Daniel Poole
 <ul>
 <li>load relevant libraries and import the data</li>
 </ul>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(here)</span>
 <span id="cb4-2"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb4-3"><a></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"fake_t1t2.csv"</span>)) <span class="co">#load data</span></span>
@@ -363,7 +396,7 @@ Dr Daniel Poole
 </section>
 <section id="selecting-and-filtering-data-2" class="slide level2">
 <h2>Selecting and Filtering Data</h2>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Select just the ID and Condition columns</span></span>
 <span id="cb6-2"><a></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a></a>  <span class="fu">select</span>(ID,Condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -406,7 +439,7 @@ Dr Daniel Poole
 </section>
 <section id="selecting-and-filtering-data-4" class="slide level2">
 <h2>Selecting and Filtering Data</h2>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Select all columns starting with 'Q'</span></span>
 <span id="cb8-2"><a></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb8-3"><a></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"Q"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -447,7 +480,7 @@ Dr Daniel Poole
 </section>
 <section id="selecting-and-filtering-data-6" class="slide level2">
 <h2>Selecting and Filtering Data</h2>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># Filters participants who responded above 3 on Q1</span></span>
 <span id="cb10-2"><a></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb10-3"><a></a>  <span class="fu">filter</span>(Q1 <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -468,7 +501,7 @@ Dr Daniel Poole
 <section id="selecting-and-filtering-data-7" class="slide level2">
 <h2>Selecting and Filtering Data</h2>
 <p>Filtering on multiple conditions</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Filters participants who responded above 3 on Q1 </span></span>
 <span id="cb12-2"><a></a><span class="co"># who were in Treatment Condition</span></span>
 <span id="cb12-3"><a></a>df <span class="sc">%&gt;%</span> </span>
@@ -500,7 +533,7 @@ Dr Daniel Poole
 <section id="selecting-and-filtering-data-8" class="slide level2">
 <h2>Selecting and Filtering Data</h2>
 <p>Filtering for a list of values</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co">#eligible participants</span></span>
 <span id="cb14-2"><a></a>ps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P003"</span>)</span>
 <span id="cb14-3"><a></a><span class="co"># selects these participants</span></span>
@@ -525,7 +558,7 @@ Dr Daniel Poole
 </ul>
 <p><br></p>
 <p>The <code>group_by()</code> function tells R how to split your data into these logical groups.</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Group the dataset by the 'Condition' variable</span></span>
 <span id="cb16-2"><a></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a></a>  <span class="fu">group_by</span>(Condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -547,7 +580,7 @@ Dr Daniel Poole
 <section id="group_by-and-summarise" class="slide level2">
 <h2><code>group_by()</code> and <code>summarise()</code></h2>
 <p>We can use <code>group_by()</code> with <code>summarise()</code> to calculate summary statistics by group</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># Group by Condition, then calculate the mean age for each group</span></span>
 <span id="cb17-2"><a></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb17-3"><a></a>  <span class="fu">group_by</span>(Condition) <span class="sc">%&gt;%</span></span>
@@ -577,7 +610,7 @@ Dr Daniel Poole
 <section id="group_by-and-summarise-1" class="slide level2">
 <h2><code>group_by()</code> and <code>summarise()</code></h2>
 <p>We can group by multiple conditions</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Group by Condition, then calculate the mean age for each group</span></span>
 <span id="cb19-2"><a></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb19-3"><a></a>  <span class="fu">group_by</span>(Condition,Timepoint) <span class="sc">%&gt;%</span></span>
@@ -602,7 +635,7 @@ Dr Daniel Poole
 </section>
 <section id="creating-and-modifying-variables-with-mutate-1" class="slide level2">
 <h2><span style="font-size: 0.85em;">Creating and Modifying Variables with <code>mutate()</code></span></h2>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Create a new column called 'q1_q2' by adding Q1 and Q2</span></span>
 <span id="cb21-2"><a></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb21-3"><a></a>  <span class="fu">mutate</span>(<span class="at">q1_q2 =</span> Q1 <span class="sc">+</span> Q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -642,7 +675,7 @@ Dr Daniel Poole
 <ul>
 <li><code>ifelse()</code> is useful here!</li>
 </ul>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Create a new group column based on whether participants responded </span></span>
 <span id="cb23-2"><a></a><span class="co"># over a value on a questionnaire item</span></span>
 <span id="cb23-3"><a></a>my_data <span class="sc">%&gt;%</span></span>
@@ -697,7 +730,7 @@ Dr Daniel Poole
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">glimpse</span>(bad_type_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 3
@@ -711,7 +744,7 @@ $ Condition &lt;chr&gt; "Control", "Treatment", "Control"</code></pre>
 <section id="changing-data-types-with-mutate-2" class="slide level2">
 <h2>Changing Data Types with <code>mutate()</code></h2>
 <p>Correct the data type using <code>mutate()</code> and <code>as.numeric()</code></p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>corrected_data <span class="ot">&lt;-</span> bad_type_data <span class="sc">%&gt;%</span></span>
 <span id="cb27-2"><a></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">as.numeric</span>(age))</span>
 <span id="cb27-3"><a></a><span class="co"># Check the new data types</span></span>
@@ -773,7 +806,7 @@ $ Condition &lt;chr&gt; "Control", "Treatment", "Control"</code></pre>
 </section>
 <section id="pivot_longer" class="slide level2">
 <h2><code>pivot_longer()</code></h2>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co">#Data in wide format</span></span>
 <span id="cb29-2"><a></a><span class="fu">head</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -790,7 +823,7 @@ $ Condition &lt;chr&gt; "Control", "Treatment", "Control"</code></pre>
 </section>
 <section id="pivot_longer-1" class="slide level2">
 <h2><code>pivot_longer()</code></h2>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>my_data_long <span class="ot">&lt;-</span> my_data <span class="sc">%&gt;%</span></span>
 <span id="cb31-2"><a></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb31-3"><a></a>    <span class="at">cols =</span> <span class="fu">c</span>(Q1, Q2), <span class="co"># Columns to be collapsed</span></span>
@@ -828,7 +861,7 @@ $ Condition &lt;chr&gt; "Control", "Treatment", "Control"</code></pre>
 <section id="pivot_wider" class="slide level2">
 <h2><code>pivot_wider()</code></h2>
 <p>If we wanted to pivot our data back into wide format</p>
-<div class="cell">
+<div class="cell" style="font-size: 1.6em;">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a>my_data_long <span class="sc">%&gt;%</span></span>
 <span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
 <span id="cb33-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> Question, <span class="co"># Column whose values will become new column names </span></span>
