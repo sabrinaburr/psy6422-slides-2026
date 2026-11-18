@@ -2041,7 +2041,7 @@
     "href": "PSY6422_Week8_Lecture2.html#grouped-data-the-group-aesthetic",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Grouped Data & the “Group” Aesthetic",
-    "text": "Grouped Data & the “Group” Aesthetic\n\nLet’s suppose we wanted to plot the trajectory of life expectancy (lifeExp) over time for each country (country) in the data (gapminder). We run the code below and end up with this plot.\n\np &lt;- ggplot(data = gapminder,\n            mapping = aes(x = year, y = gdpPercap)) + \n  geom_line() + \n  theme_bw()\np"
+    "text": "Grouped Data & the “Group” Aesthetic\n\nLet’s suppose we wanted to plot the trajectory of GDP per capita (gdpPercap) over time for each country (country) in the data (gapminder). We run the code below and end up with this plot.\n\np &lt;- ggplot(data = gapminder,\n            mapping = aes(x = year, y = gdpPercap)) + \n  geom_line() + \n  theme_bw()\np"
   },
   {
     "objectID": "PSY6422_Week8_Lecture2.html#grouped-data-the-group-aesthetic-1",
@@ -2097,7 +2097,7 @@
     "href": "PSY6422_Week8_Lecture2.html#facet_wrap-4",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "facet_wrap()",
-    "text": "facet_wrap()\n\nThis plot brings together an aesthetic mapping of x and y variables, a grouping aesthetic country), two geoms (line point and smoother), a log-transformed y-axis with appropriate tick labels, a faceting variable (continent), and title and axes labels.\n\n\np &lt;- ggplot(data = gapminder, mapping = aes(x = year, y = gdpPercap)) +\n  geom_line(color=\"gray70\", aes(group = country)) +\n    geom_smooth(size = 1.1, method = \"loess\", se = FALSE) +\n    scale_y_log10(labels=scales::dollar) +\n    facet_wrap(~ continent, ncol = 5) +\n    labs(x = \"Year\",\n         y = \"GDP per capita\",\n         title = \"GDP per capita on Five Continents\") + \n  theme_bw()"
+    "text": "facet_wrap()\n\nThis plot brings together an aesthetic mapping of x and y variables, a grouping aesthetic country), two geoms (line point and smoother), a log-transformed y-axis with appropriate tick labels, a faceting variable (continent), and title and axes labels.\n\n\np &lt;- ggplot(data = gapminder, mapping = aes(x = year, y = gdpPercap)) +\n  geom_line(color=\"gray70\", aes(group = country)) +\n    geom_smooth(linewidth = 1.1, method = \"loess\", se = FALSE) +\n    scale_y_log10(labels=scales::dollar) +\n    facet_wrap(~ continent, ncol = 5) +\n    labs(x = \"Year\",\n         y = \"GDP per capita\",\n         title = \"GDP per capita on Five Continents\") + \n  theme_bw()"
   },
   {
     "objectID": "PSY6422_Week8_Lecture2.html#facet_wrap-5",
@@ -2174,7 +2174,7 @@
     "href": "PSY6422_Week8_Lecture2.html#geoms-can-transform-data-4",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Geoms Can Transform Data",
-    "text": "Geoms Can Transform Data\n\nThe gray bars can be a bit boring. We can fill them with colour by mapping the drive (drv) variable to fill in addition to mapping it to x. We use fill for painting the insides of shapes. If we only map to color, only the border lines of the bars will be assigned colours.\n\np &lt;- ggplot(data = mpg,\n            mapping = aes(x = drv, fill = drv)) +\n  geom_bar() + \n  guides(fill = FALSE) + # this turns off/hides the legend\n  theme_bw()\np"
+    "text": "Geoms Can Transform Data\n\nWe can fill the bars with colour by mapping the drive (drv) variable in the dataset mpg to fill in addition to mapping it to x. We use fill for painting the insides of shapes. If we only map to color, only the border lines of the bars will be assigned colours.\n\nmpg %&gt;% as_tibble() %&gt;% slice_head(n = 8)\n\n# A tibble: 8 × 11\n  manufacturer model      displ  year   cyl trans  drv     cty   hwy fl    class\n  &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n1 audi         a4           1.8  1999     4 auto(… f        18    29 p     comp…\n2 audi         a4           1.8  1999     4 manua… f        21    29 p     comp…\n3 audi         a4           2    2008     4 manua… f        20    31 p     comp…\n4 audi         a4           2    2008     4 auto(… f        21    30 p     comp…\n5 audi         a4           2.8  1999     6 auto(… f        16    26 p     comp…\n6 audi         a4           2.8  1999     6 manua… f        18    26 p     comp…\n7 audi         a4           3.1  2008     6 auto(… f        18    27 p     comp…\n8 audi         a4 quattro   1.8  1999     4 manua… 4        18    26 p     comp…"
   },
   {
     "objectID": "PSY6422_Week8_Lecture2.html#frequency-plots-the-slightly-awkward-way",
@@ -2258,7 +2258,7 @@
     "href": "PSY6422_Week8_Lecture2.html#histograms-and-density-plots-3",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Histograms and Density Plots",
-    "text": "Histograms and Density Plots\n\nWhile histograms summarise single variables, it’s also possible to use several at once to compare distributions. We can facet histograms by some variable of interest, or we can compare them in the same plot using the fill mapping."
+    "text": "Histograms and Density Plots\n\nWhile histograms summarise single variables, it’s also possible to use several at once to compare distributions. We can facet histograms by some variable of interest, or we can compare them in the same plot using the fill mapping. Let’s look at an example where we look at the distribution of the percentage of college-educated residents in each county in two US states."
   },
   {
     "objectID": "PSY6422_Week8_Lecture2.html#histograms-and-density-plots-4",
@@ -2293,14 +2293,14 @@
     "href": "PSY6422_Week8_Lecture2.html#kernel-density-estimates-2",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Kernel Density Estimates",
-    "text": "Kernel Density Estimates\n\nLike geom_bar(), the count-based defaults computed by the stat_ functions for geom_histogram() and geom_density() can return proportional measures.\n\nFor geom_density(), the stat_density() function can return its default ..density.. statistic, or ..scaled.., which will give a proportional density estimate.\n\nIt can also return a statistic called ..count.., which is the density times the number of points. This can be used in stacked density plots."
+    "text": "Kernel Density Estimates\n\nLike geom_bar(), the count-based defaults computed by the stat_ functions for geom_histogram() and geom_density() can return proportional measures.\n\nFor geom_density(), the stat_density() function can return its default after_stat(density) statistic, or after_stat(scaled), which will give a proportional density estimate.\n\nIt can also return a statistic called ..count.., which is the density times the number of points. This can be used in stacked density plots."
   },
   {
     "objectID": "PSY6422_Week8_Lecture2.html#kernel-density-estimates-3",
     "href": "PSY6422_Week8_Lecture2.html#kernel-density-estimates-3",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Kernel Density Estimates",
-    "text": "Kernel Density Estimates\n\nHere we can see an example of the scaled densities for a subset of our data, where we are looking at Ohio (OH) and Wisconsin (WI).\n\n\np &lt;- ggplot(data = subset(midwest, subset = state %in% oh_wi),\n            mapping = aes(x = area, fill = state, color = state)) + \n  geom_density(alpha = 0.3, mapping = (aes(y = ..scaled..))) + \n  theme_bw()\np"
+    "text": "Kernel Density Estimates\n\nHere we can see an example of the scaled densities for a subset of our data, where we are looking at Ohio (OH) and Wisconsin (WI).\n\n\np &lt;- ggplot(data = subset(midwest, subset = state %in% oh_wi),\n            mapping = aes(x = area, fill = state, color = state)) + \n  geom_density(alpha = 0.3, mapping = (aes(y = after_stat(scaled)))) + \n  theme_bw()\np"
   },
   {
     "objectID": "PSY6422_Week8_Lecture2.html#avoid-transformations-when-necessary",
@@ -4128,5 +4128,12 @@
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Enter the Tidyverse!",
     "text": "Enter the Tidyverse!\n\n\n#install tidyverse package\ninstall.packages(\"tidyverse\")\n#loads the tidyverse package\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "PSY6422_Week8_Lecture2.html#geoms-can-transform-data-5",
+    "href": "PSY6422_Week8_Lecture2.html#geoms-can-transform-data-5",
+    "title": "PSY6422 - Data Management & Visualisation",
+    "section": "Geoms Can Transform Data",
+    "text": "Geoms Can Transform Data\n\nWe can fill the bars with colour by mapping the drive (drv) variable in the dataset mpg to fill in addition to mapping it to x. We use fill for painting the insides of shapes. If we only map to color, only the border lines of the bars will be assigned colours.\n\np &lt;- ggplot(data = mpg,\n            mapping = aes(x = drv, fill = drv)) +\n  geom_bar() + \n  guides(fill = FALSE) + # this turns off/hides the legend\n  theme_bw()\np"
   }
 ]

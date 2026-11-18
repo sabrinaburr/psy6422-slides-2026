@@ -326,7 +326,7 @@ Dr Sabrina Burr
 <section id="grouped-data-the-group-aesthetic" class="slide level2">
 <h2>Grouped Data &amp; the “Group” Aesthetic</h2>
 <p><br></p>
-<p>Let’s suppose we wanted to plot the trajectory of life expectancy (<code>lifeExp</code>) over time for each country (<code>country</code>) in the data (<code>gapminder</code>). We run the code below and end up with this plot.</p>
+<p>Let’s suppose we wanted to plot the trajectory of GDP per capita (<code>gdpPercap</code>) over time for each country (<code>country</code>) in the data (<code>gapminder</code>). We run the code below and end up with this plot.</p>
 <div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> gapminder,</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap)) <span class="sc">+</span> </span>
@@ -412,7 +412,7 @@ Dr Sabrina Burr
 <div class="cell my-custom-code-size">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> gapminder, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap)) <span class="sc">+</span></span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">"gray70"</span>, <span class="fu">aes</span>(<span class="at">group =</span> country)) <span class="sc">+</span></span>
-<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>(<span class="at">labels=</span>scales<span class="sc">::</span>dollar) <span class="sc">+</span></span>
 <span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> continent, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
 <span id="cb6-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
@@ -529,17 +529,38 @@ Dr Sabrina Burr
 <section id="geoms-can-transform-data-4" class="slide level2">
 <h2>Geoms Can Transform Data</h2>
 <p><br></p>
-<p>The gray bars can be a bit boring. We can fill them with colour by mapping the drive (<code>drv</code>) variable to <code>fill</code> in addition to mapping it to <code>x</code>. We use <code>fill</code> for painting the insides of shapes. If we only map to <code>color</code>, only the border lines of the bars will be assigned colours.</p>
+<p>We can fill the bars with colour by mapping the drive (<code>drv</code>) variable in the dataset <code>mpg</code> to <code>fill</code> in addition to mapping it to <code>x</code>. We use <code>fill</code> for painting the insides of shapes. If we only map to <code>color</code>, only the border lines of the bars will be assigned colours.</p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg,</span>
-<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drv, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
-<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
-<span id="cb11-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="co"># this turns off/hides the legend</span></span>
-<span id="cb11-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb11-6"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 11
+  manufacturer model      displ  year   cyl trans  drv     cty   hwy fl    class
+  &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+1 audi         a4           1.8  1999     4 auto(… f        18    29 p     comp…
+2 audi         a4           1.8  1999     4 manua… f        21    29 p     comp…
+3 audi         a4           2    2008     4 manua… f        20    31 p     comp…
+4 audi         a4           2    2008     4 auto(… f        21    30 p     comp…
+5 audi         a4           2.8  1999     6 auto(… f        16    26 p     comp…
+6 audi         a4           2.8  1999     6 manua… f        18    26 p     comp…
+7 audi         a4           3.1  2008     6 auto(… f        18    27 p     comp…
+8 audi         a4 quattro   1.8  1999     4 manua… 4        18    26 p     comp…</code></pre>
+</div>
+</div>
+</section>
+<section id="geoms-can-transform-data-5" class="slide level2">
+<h2>Geoms Can Transform Data</h2>
+<p><br></p>
+<p>We can fill the bars with colour by mapping the drive (<code>drv</code>) variable in the dataset <code>mpg</code> to <code>fill</code> in addition to mapping it to <code>x</code>. We use <code>fill</code> for painting the insides of shapes. If we only map to <code>color</code>, only the border lines of the bars will be assigned colours.</p>
+<div class="cell my-custom-code-size">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg,</span>
+<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drv, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
+<span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb13-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="co"># this turns off/hides the legend</span></span>
+<span id="cb13-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb13-6"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
 <section id="frequency-plots-the-slightly-awkward-way" class="slide level2">
 <h2>Frequency Plots: The Slightly Awkward Way</h2>
 <p><br></p>
@@ -559,43 +580,43 @@ Dr Sabrina Burr
 </ul>
 <p><br></p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> diamonds,</span>
-<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> clarity, <span class="at">fill =</span> cut)) <span class="sc">+</span> </span>
-<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
-<span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb12-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> diamonds,</span>
+<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> clarity, <span class="at">fill =</span> cut)) <span class="sc">+</span> </span>
+<span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb14-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb14-5"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="stacked-bar-charts-1" class="slide level2">
 <h2>Stacked Bar Charts</h2>
 
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="position-adjustment-position-fill" class="slide level2">
 <h2>Position Adjustment: <code>position = fill</code></h2>
 <p><br></p>
 <p>Setting the <code>position</code> argument to <code>"fill"</code> normalises the bars, making them all the same height. This makes it easier to compare proportions across groups, but you lose the ability to see the relative size of each group with respect to the overall total.</p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> diamonds,</span>
-<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> clarity, <span class="at">fill =</span> cut)) <span class="sc">+</span> </span>
-<span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
-<span id="cb13-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb13-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> diamonds,</span>
+<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> clarity, <span class="at">fill =</span> cut)) <span class="sc">+</span> </span>
+<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
+<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb15-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
 <section id="dodging-bars-the-proportional-problem" class="slide level2">
 <h2>Dodging Bars: The Proportional Problem</h2>
 <p><br></p>
 <p>To show proportions side-by-side, we can use <code>position = "dodge"</code>. However, in doing this, <code>ggplot</code> will change the y-axis back to count. One thing we can try is mapping <code>y = after_stat(prop)</code> to show proportions, but this often leads to issues with grouping. For example, let’s run the code below:</p>
 <p><br></p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> diamonds,</span>
-<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> clarity, <span class="at">fill =</span> cut)) <span class="sc">+</span> </span>
-<span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>,</span>
-<span id="cb14-4"><a aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(prop), <span class="at">group =</span> cut)) <span class="sc">+</span> </span>
-<span id="cb14-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb14-6"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> diamonds,</span>
+<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> clarity, <span class="at">fill =</span> cut)) <span class="sc">+</span> </span>
+<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>,</span>
+<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(prop), <span class="at">group =</span> cut)) <span class="sc">+</span> </span>
+<span id="cb16-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb16-6"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dodging-bars-the-proportional-problem-1" class="slide level2">
@@ -603,27 +624,27 @@ Dr Sabrina Burr
 <p><br></p>
 <p>We can see the proportions <em>across</em> clarity grades for each cut, not <em>within</em> clarity grade.</p>
 
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
 <section id="faceting-for-clarity" class="slide level2">
 <h2>Faceting for Clarity</h2>
 <p><br></p>
 <p>The easiest thing to do is to stop trying to force <code>geom_bar()</code> to do all the work in a single step. A more reliable approach is to facet the plot. We can create a proportional bar chart of diamond cuts and then facet that by clarity grade. The proportions are calculated within each panel, providing the desired breakdown.</p>
 <p><br></p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> diamonds,</span>
-<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut)) <span class="sc">+</span> </span>
-<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>,</span>
-<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(prop), <span class="at">group =</span> clarity)) <span class="sc">+</span></span>
-<span id="cb15-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> clarity, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
-<span id="cb15-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb15-7"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> diamonds,</span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut)) <span class="sc">+</span> </span>
+<span id="cb17-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>,</span>
+<span id="cb17-4"><a aria-hidden="true" tabindex="-1"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(prop), <span class="at">group =</span> clarity)) <span class="sc">+</span></span>
+<span id="cb17-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> clarity, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
+<span id="cb17-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb17-7"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="faceting-for-clarity-1" class="slide level2">
 <h2>Faceting for Clarity</h2>
 <p><br></p>
 
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
 <section id="histograms-and-density-plots" class="slide level2">
 <h2>Histograms and Density Plots</h2>
 <p><br></p>
@@ -649,15 +670,15 @@ Dr Sabrina Burr
 <div class="column" style="width:50%;">
 <p><br></p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> midwest,</span>
-<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area)) <span class="sc">+</span> </span>
-<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb16-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> midwest,</span>
+<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area)) <span class="sc">+</span> </span>
+<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+<p><img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -665,15 +686,15 @@ Dr Sabrina Burr
 </div><div class="column" style="width:50%;">
 <p><br></p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> midwest,</span>
-<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area)) <span class="sc">+</span> </span>
-<span id="cb17-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
-<span id="cb17-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb17-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> midwest,</span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area)) <span class="sc">+</span> </span>
+<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb19-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb19-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+<p><img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -683,7 +704,7 @@ Dr Sabrina Burr
 <section id="histograms-and-density-plots-3" class="slide level2">
 <h2>Histograms and Density Plots</h2>
 <p><br></p>
-<p>While histograms summarise single variables, it’s also possible to use several at once to compare distributions. We can facet histograms by some variable of interest, or we can compare them in the same plot using the <code>fill</code> mapping.</p>
+<p>While histograms summarise single variables, it’s also possible to use several at once to compare distributions. We can facet histograms by some variable of interest, or we can compare them in the same plot using the <code>fill</code> mapping. Let’s look at an example where we look at the distribution of the percentage of college-educated residents in each county in two US states.</p>
 </section>
 <section id="histograms-and-density-plots-4" class="slide level2">
 <h2>Histograms and Density Plots</h2>
@@ -691,52 +712,52 @@ Dr Sabrina Burr
 <p>Here, we subset the data to pick out two states (Ohio - <code>OH</code> and Wisconsin - <code>WI</code>). Then we use the <code>subset()</code> function to take our data and filter it so that only the rows whose <code>state</code> name is in the vector are selected. The <code>%in%</code> operator is a convenient way to filter on more than one term in a variable when using <code>subset().</code></p>
 <p><br></p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a>oh_wi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"OH"</span>, <span class="st">"WI"</span>)</span>
-<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(midwest, <span class="at">subset =</span> state <span class="sc">%in%</span> oh_wi),</span>
-<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> percollege, <span class="at">fill =</span> state)) <span class="sc">+</span> </span>
-<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
-<span id="cb18-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb18-7"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a>oh_wi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"OH"</span>, <span class="st">"WI"</span>)</span>
+<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(midwest, <span class="at">subset =</span> state <span class="sc">%in%</span> oh_wi),</span>
+<span id="cb20-4"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> percollege, <span class="at">fill =</span> state)) <span class="sc">+</span> </span>
+<span id="cb20-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
+<span id="cb20-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb20-7"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="histograms-and-density-plots-5" class="slide level2">
 <h2>Histograms and Density Plots</h2>
 
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
 <section id="kernel-density-estimates" class="slide level2">
 <h2>Kernel Density Estimates</h2>
 <p><br></p>
 <p>The <code>geom_density()</code> function will calculate a kernel density estimate of the underlying distribution for a continuous variable.</p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> midwest,</span>
-<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area)) <span class="sc">+</span> </span>
-<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
-<span id="cb19-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb19-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> midwest,</span>
+<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area)) <span class="sc">+</span> </span>
+<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
+<span id="cb21-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb21-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
 <section id="kernel-density-estimates-1" class="slide level2">
 <h2>Kernel Density Estimates</h2>
 <p><br></p>
 <p>We can use <code>color</code> (for lines) and <code>fill</code> (for body of curve). We can adjust transparency with <code>alpha</code> to manage overlap.</p>
 <p><br></p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> midwest,</span>
-<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area, <span class="at">fill =</span> state, <span class="at">color =</span> state)) <span class="sc">+</span> </span>
-<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
-<span id="cb20-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb20-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> midwest,</span>
+<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area, <span class="at">fill =</span> state, <span class="at">color =</span> state)) <span class="sc">+</span> </span>
+<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
 <section id="kernel-density-estimates-2" class="slide level2">
 <h2>Kernel Density Estimates</h2>
 <p><br></p>
 <p>Like <code>geom_bar()</code>, the count-based defaults computed by the <code>stat_</code> functions for <code>geom_histogram()</code> and <code>geom_density()</code> can return proportional measures.</p>
 <p><br></p>
-<p>For <code>geom_density()</code>, the <code>stat_density()</code> function can return its default <code>..density..</code> statistic, or <code>..scaled..</code>, which will give a proportional density estimate.</p>
+<p>For <code>geom_density()</code>, the <code>stat_density()</code> function can return its default <code>after_stat(density)</code> statistic, or <code>after_stat(scaled)</code>, which will give a proportional density estimate.</p>
 <p><br></p>
 <p>It can also return a statistic called <code>..count..</code>, which is the density times the number of points. This can be used in stacked density plots.</p>
 </section>
@@ -746,14 +767,14 @@ Dr Sabrina Burr
 <p>Here we can see an example of the scaled densities for a subset of our data, where we are looking at Ohio (<code>OH</code>) and Wisconsin (<code>WI</code>).</p>
 <p><br></p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(midwest, <span class="at">subset =</span> state <span class="sc">%in%</span> oh_wi),</span>
-<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area, <span class="at">fill =</span> state, <span class="at">color =</span> state)) <span class="sc">+</span> </span>
-<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">mapping =</span> (<span class="fu">aes</span>(<span class="at">y =</span> ..scaled..))) <span class="sc">+</span> </span>
-<span id="cb21-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb21-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(midwest, <span class="at">subset =</span> state <span class="sc">%in%</span> oh_wi),</span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> area, <span class="at">fill =</span> state, <span class="at">color =</span> state)) <span class="sc">+</span> </span>
+<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">mapping =</span> (<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(scaled)))) <span class="sc">+</span> </span>
+<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb23-5"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
 <section id="avoid-transformations-when-necessary" class="slide level2">
 <h2>Avoid Transformations When Necessary</h2>
 <p><br></p>
@@ -772,14 +793,14 @@ Dr Sabrina Burr
 <p><br></p>
 <p>Let’s suppose we have this titanic data. We don’t have individual-level data on who survived, but we have a small table of counts of survivors by sex.</p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">fate =</span> <span class="fu">c</span>(<span class="st">"perished"</span>, <span class="st">"perished"</span>, <span class="st">"survived"</span>, <span class="st">"survived"</span>),</span>
-<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>, <span class="st">"male"</span>, <span class="st">"female"</span>),</span>
-<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">1364</span>, <span class="dv">126</span>, <span class="dv">367</span>, <span class="dv">344</span>),</span>
-<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">percent =</span> <span class="fu">c</span>(<span class="fl">62.0</span>, <span class="fl">5.7</span>, <span class="fl">16.7</span>, <span class="fl">15.6</span>)</span>
-<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a aria-hidden="true" tabindex="-1"></a>titanic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">fate =</span> <span class="fu">c</span>(<span class="st">"perished"</span>, <span class="st">"perished"</span>, <span class="st">"survived"</span>, <span class="st">"survived"</span>),</span>
+<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>, <span class="st">"male"</span>, <span class="st">"female"</span>),</span>
+<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">1364</span>, <span class="dv">126</span>, <span class="dv">367</span>, <span class="dv">344</span>),</span>
+<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">percent =</span> <span class="fu">c</span>(<span class="fl">62.0</span>, <span class="fl">5.7</span>, <span class="fl">16.7</span>, <span class="fl">15.6</span>)</span>
+<span id="cb24-6"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a aria-hidden="true" tabindex="-1"></a>titanic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      fate    sex    n percent
 1 perished   male 1364    62.0
@@ -795,15 +816,15 @@ Dr Sabrina Burr
 <p>Because we are working directly with percentage values in a summary table, we no longer have any need for <code>ggplot2</code> to count up values for us or perform any other calculations. <br></p>
 <p>We can tell <code>geom_bar()</code> not to do any work on the variable before plotting it with <code>stat = 'identity'</code> in the <code>geom_bar()</code> call.</p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> titanic,</span>
-<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fate, <span class="at">y =</span> percent, <span class="at">fill =</span> sex)) <span class="sc">+</span> </span>
-<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> </span>
-<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb24-6"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> titanic,</span>
+<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fate, <span class="at">y =</span> percent, <span class="at">fill =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb26-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> </span>
+<span id="cb26-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb26-6"><a aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"></section>
 <section id="geom_col-the-convenient-shortcut" class="slide level2">
 <h2><code>geom_col()</code>: The Convenient Shortcut</h2>
 <p><br></p>
@@ -817,7 +838,7 @@ Dr Sabrina Burr
 <p>Consider the <code>oecd_sum</code> dataset (from <code>socviz</code> package), which shows the difference in life expectancy between the US and the OECD average over time.</p>
 <p>The <code>diff</code> column contains both positive (US below OECD) and negative (US above OECD) values.</p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a>oecd_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a>oecd_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 57 × 5
 # Groups:   year [57]
@@ -843,20 +864,20 @@ Dr Sabrina Burr
 <p>We can use <code>geom_col()</code> to plot the <code>diff</code> column directly. We’ll also use the <code>hi_lo</code> variable to colour the bars, providing a quick visual cue as to whether the US was above or below the average.</p>
 <p>Notice that we don’t need <code>stat = "identity"</code>; <code>geom_col()</code> assumes it by default.</p>
 <div class="cell my-custom-code-size">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> oecd_sum,</span>
-<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> diff, <span class="at">fill =</span> hi_lo)) <span class="sc">+</span> </span>
-<span id="cb27-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb27-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb27-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Difference in Years"</span>,</span>
-<span id="cb27-6"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"The US Life Expectancy Gap"</span>,</span>
-<span id="cb27-7"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Difference between US and OECD average life expectancies 1960-2015"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> oecd_sum,</span>
+<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> diff, <span class="at">fill =</span> hi_lo)) <span class="sc">+</span> </span>
+<span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb29-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Difference in Years"</span>,</span>
+<span id="cb29-6"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"The US Life Expectancy Gap"</span>,</span>
+<span id="cb29-7"><a aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Difference between US and OECD average life expectancies 1960-2015"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="using-geom_col-with-positive-and-negative-values-1" class="slide level2">
 <h2>Using <code>geom_col()</code> with Positive and Negative Values</h2>
 <p><br></p>
 
-<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"></section>
+<img data-src="PSY6422_Week8_Lecture2_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <p><code>ggplot2</code> is a powerful tool for visualisation. It is important to think about the “grammar” when creating visualisations in <code>ggplot2</code> to ensure that the plot is doing what you want it to do.</p>
