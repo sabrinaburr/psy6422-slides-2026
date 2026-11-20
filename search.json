@@ -2349,7 +2349,7 @@
     "href": "PSY6422_Week8_Lecture2.html#using-geom_col-with-positive-and-negative-values",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Using geom_col() with Positive and Negative Values",
-    "text": "Using geom_col() with Positive and Negative Values\n\nWe can use geom_col() to plot the diff column directly. We’ll also use the hi_lo variable to colour the bars, providing a quick visual cue as to whether the US was above or below the average.\nNotice that we don’t need stat = \"identity\"; geom_col() assumes it by default.\n\np &lt;- ggplot(data = oecd_sum,\n            mapping = aes(x = year, y = diff, fill = hi_lo)) + \n  geom_col() +\n    guides(fill = FALSE) +\n    labs(x = NULL, y = \"Difference in Years\",\n         title = \"The US Life Expectancy Gap\",\n         subtitle = \"Difference between US and OECD average life expectancies 1960-2015\")"
+    "text": "Using geom_col() with Positive and Negative Values\n\nWe can use geom_col() to plot the diff column directly. We’ll also use the hi_lo variable to colour the bars, providing a quick visual cue as to whether the US was above or below the average.\nNotice that we don’t need stat = \"identity\"; geom_col() assumes it by default.\n\np &lt;- ggplot(data = oecd_sum,\n            mapping = aes(x = year, y = diff, fill = hi_lo)) + \n  geom_col() +\n    guides(fill = \"none\") +\n    labs(x = NULL, y = \"Difference in Years\",\n         title = \"The US Life Expectancy Gap\",\n         subtitle = \"Difference between US and OECD average life expectancies 1960-2015\")"
   },
   {
     "objectID": "PSY6422_Week8_Lecture2.html#using-geom_col-with-positive-and-negative-values-1",
@@ -4134,6 +4134,6 @@
     "href": "PSY6422_Week8_Lecture2.html#geoms-can-transform-data-5",
     "title": "PSY6422 - Data Management & Visualisation",
     "section": "Geoms Can Transform Data",
-    "text": "Geoms Can Transform Data\n\nWe can fill the bars with colour by mapping the drive (drv) variable in the dataset mpg to fill in addition to mapping it to x. We use fill for painting the insides of shapes. If we only map to color, only the border lines of the bars will be assigned colours.\n\np &lt;- ggplot(data = mpg,\n            mapping = aes(x = drv, fill = drv)) +\n  geom_bar() + \n  guides(fill = FALSE) + # this turns off/hides the legend\n  theme_bw()\np"
+    "text": "Geoms Can Transform Data\n\nWe can fill the bars with colour by mapping the drive (drv) variable in the dataset mpg to fill in addition to mapping it to x. We use fill for painting the insides of shapes. If we only map to color, only the border lines of the bars will be assigned colours.\n\np &lt;- ggplot(data = mpg,\n            mapping = aes(x = drv, fill = drv)) +\n  geom_bar() + \n  guides(fill = \"none\") + # this turns off/hides the legend\n  theme_bw()\np"
   }
 ]
